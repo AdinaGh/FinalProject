@@ -18,7 +18,9 @@ namespace Web.Models
         public Recipe()
         {
             this.Comments = new HashSet<Comment>();
+            this.RecipeCategories = new HashSet<RecipeCategory>();
             this.RecipeIngredients = new HashSet<RecipeIngredient>();
+            this.RecipeOccasions = new HashSet<RecipeOccasion>();
             this.RecipeSteps = new HashSet<RecipeStep>();
             this.UserRatings = new HashSet<UserRating>();
         }
@@ -26,19 +28,19 @@ namespace Web.Models
         public int RecipeId { get; set; }
         public int CreatedUserId { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public int CategoryId { get; set; }
-        public int OccasionId { get; set; }
         public int CuisineId { get; set; }
         public int DificultyId { get; set; }
     
-        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual Cuisine Cuisine { get; set; }
         public virtual Dificulty Dificulty { get; set; }
-        public virtual Occasion Occasion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RecipeCategory> RecipeCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RecipeOccasion> RecipeOccasions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecipeStep> RecipeSteps { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

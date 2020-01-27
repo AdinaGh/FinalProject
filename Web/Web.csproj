@@ -134,8 +134,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RecipesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -157,6 +157,9 @@
     <Compile Include="Models\Recipe.cs">
       <DependentUpon>RecipeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RecipeCategory.cs">
+      <DependentUpon>RecipeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RecipeIngredient.cs">
       <DependentUpon>RecipeModel.tt</DependentUpon>
     </Compile>
@@ -175,10 +178,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RecipeModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\RecipeStep.cs">
+    <Compile Include="Models\RecipeOccasion.cs">
       <DependentUpon>RecipeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\RecipeStep.cs">
       <DependentUpon>RecipeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserRating.cs">
@@ -244,6 +247,11 @@
     <Content Include="Views\Recipes\Details.cshtml" />
     <Content Include="Views\Recipes\Edit.cshtml" />
     <Content Include="Views\Recipes\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

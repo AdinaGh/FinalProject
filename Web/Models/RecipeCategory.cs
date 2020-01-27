@@ -12,18 +12,13 @@ namespace Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class RecipeCategory
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
-        {
-            this.RecipeCategories = new HashSet<RecipeCategory>();
-        }
-    
+        public int RecipeCategoryId { get; set; }
+        public int RecipeId { get; set; }
         public int CategoryId { get; set; }
-        public string Name { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RecipeCategory> RecipeCategories { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Recipe Recipe { get; set; }
     }
 }

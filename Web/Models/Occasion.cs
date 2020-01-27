@@ -17,13 +17,13 @@ namespace Web.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Occasion()
         {
-            this.Recipes = new HashSet<Recipe>();
+            this.RecipeOccasions = new HashSet<RecipeOccasion>();
         }
     
         public int OccasionId { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recipe> Recipes { get; set; }
+        public virtual ICollection<RecipeOccasion> RecipeOccasions { get; set; }
     }
 }

@@ -31,9 +31,10 @@ namespace Web.Models
         public virtual DbSet<Dificulty> Dificulties { get; set; }
         public virtual DbSet<Occasion> Occasions { get; set; }
         public virtual DbSet<Recipe> Recipes { get; set; }
+        public virtual DbSet<RecipeCategory> RecipeCategories { get; set; }
         public virtual DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+        public virtual DbSet<RecipeOccasion> RecipeOccasions { get; set; }
         public virtual DbSet<RecipeStep> RecipeSteps { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserRating> UserRatings { get; set; }
     }
 }

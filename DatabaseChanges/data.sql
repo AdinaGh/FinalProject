@@ -13,7 +13,7 @@ INSERT INTO [Cuisine]([Name])
 INSERT INTO [Dificulty]([Name])
      VALUES('Easy')
 INSERT INTO [Dificulty]([Name])
-     VALUES('Medium')
+     VALUES('Moderate')
 
 INSERT INTO [Occasion]([Name])
      VALUES('Party')

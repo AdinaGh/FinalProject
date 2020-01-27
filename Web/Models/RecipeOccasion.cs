@@ -12,12 +12,13 @@ namespace Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class RecipeOccasion
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int RecipeOccasionId { get; set; }
+        public int RecipeId { get; set; }
+        public int OccasionId { get; set; }
+    
+        public virtual Occasion Occasion { get; set; }
+        public virtual Recipe Recipe { get; set; }
     }
 }
