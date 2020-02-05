@@ -26,5 +26,12 @@ namespace Web.Controllers
 
             return View();
         }
+
+        public ActionResult Old()
+        {
+            ViewBag.Message = "Old index page.";
+
+            return View();
+        }
     }
 }
