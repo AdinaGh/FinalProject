@@ -7,6 +7,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 115px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -21,4 +22,38 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.logo {
+    width: 100px;
+}
+
+@media (max-width: 768px) {
+    .hide-small{
+        display:none;
+    }
+}
+
+.top-menu > ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.top-menu > ul > li {
+    position: relative;
+    display: block;
+    list-style: none;
+    float:left;
+}
+
+    .top-menu > ul > li > a {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+div.top-menu {
+    vertical-align: middle;
+    display: inline;
+    float: unset;
 }
