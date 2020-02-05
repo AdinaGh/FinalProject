@@ -139,54 +139,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Category.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Comment.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Cuisine.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Dificulty.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Occasion.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Recipe.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RecipeCategory.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RecipeIngredient.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RecipeModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RecipeModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RecipeModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RecipeModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RecipeModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RecipeOccasion.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RecipeStep.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserRating.cs">
-      <DependentUpon>RecipeModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,25 +150,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\RecipeModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RecipeModel.edmx</DependentUpon>
-      <LastGenOutput>RecipeModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\RecipeModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RecipeModel.edmx</DependentUpon>
-      <LastGenOutput>RecipeModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\RecipeModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RecipeModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\RecipeModel.edmx.diagram">
-      <DependentUpon>RecipeModel.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -258,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -285,6 +221,12 @@
     <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{f56a20c8-d009-4454-9af3-4c4dcb56752b}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
