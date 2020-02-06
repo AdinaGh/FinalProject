@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Web.Models.Recipe>
+﻿@model IEnumerable<Entities.Models.Recipe>
 
 @{
     ViewBag.Title = "Index";
@@ -18,16 +18,10 @@
             @Html.DisplayNameFor(model => model.CreatedDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Cuisine.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Dificulty.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Occasion.Name)
         </th>
         <th></th>
     </tr>
@@ -41,16 +35,10 @@
             @Html.DisplayFor(modelItem => item.CreatedDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category.Name)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Cuisine.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Dificulty.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Occasion.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.RecipeId }) |

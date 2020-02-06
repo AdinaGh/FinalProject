@@ -1,0 +1,11 @@
+D:\work\repos\FinalProject\Entities\bin\Debug\Entities.dll.config
+D:\work\repos\FinalProject\Entities\bin\Debug\Entities.dll
+D:\work\repos\FinalProject\Entities\bin\Debug\Entities.pdb
+D:\work\repos\FinalProject\Entities\bin\Debug\EntityFramework.dll
+D:\work\repos\FinalProject\Entities\bin\Debug\EntityFramework.SqlServer.dll
+D:\work\repos\FinalProject\Entities\bin\Debug\EntityFramework.xml
+D:\work\repos\FinalProject\Entities\bin\Debug\EntityFramework.SqlServer.xml
+D:\work\repos\FinalProject\Entities\obj\Debug\Entities.csprojAssemblyReference.cache
+D:\work\repos\FinalProject\Entities\obj\Debug\Entities.csproj.CopyComplete
+D:\work\repos\FinalProject\Entities\obj\Debug\Entities.dll
+D:\work\repos\FinalProject\Entities\obj\Debug\Entities.pdb
