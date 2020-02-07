@@ -7,17 +7,32 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Entities.Models;
+using Services.Interfaces;
+using Web.Models;
 
 namespace Web.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly RecipesEntities db = new RecipesEntities();
+        private readonly ICategoryService _categoryService;
+        public CategoriesController(ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+        }
 
         // GET: Categories
+        //[ValidateAntiForgeryToken]
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            var categories = _categoryService
+                .GetAll()
+                .Select(ca => new CategoryViewModel()
+                {
+                    Name = ca.Name,
+                    CategoryId = ca.CategoryId,
+                    //RecipeCategories = ca.RecipeCategories
+                });
+            return View(categories);
         }
 
         // GET: Categories/Details/5
@@ -27,12 +42,17 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            var category = _categoryService.GetById(id.Value);
             if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(new CategoryViewModel()
+            {
+                CategoryId = category.CategoryId,
+                Name = category.Name,
+                //RecipeCategories = category.RecipeCategories
+            });
         }
 
         // GET: Categories/Create
@@ -46,12 +66,15 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryId,Name")] Category category)
+        public ActionResult Create([Bind(Include = "CategoryId,Name")] CategoryViewModel category)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
+                _categoryService.Add(new Category()
+                {
+                    CategoryId = category.CategoryId,
+                    Name = category.Name,
+                });
                 return RedirectToAction("Index");
             }
 
@@ -65,12 +88,18 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+           
+            var category = _categoryService.GetById(id.Value);
             if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(new CategoryViewModel()
+            {
+                CategoryId = category.CategoryId,
+                Name = category.Name,
+                //RecipeCategories = category.RecipeCategories
+            });
         }
 
         // POST: Categories/Edit/5
@@ -78,12 +107,15 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryId,Name")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryId,Name")] CategoryViewModel category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
+                _categoryService.Update(new Category()
+                {
+                    CategoryId = category.CategoryId,
+                    Name = category.Name
+                });
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -96,12 +128,17 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            var category = _categoryService.GetById(id.Value);
             if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(new CategoryViewModel()
+            {
+                Name = category.Name,
+                CategoryId=category.CategoryId,
+                //RecipeCategories = category.RecipeCategories
+            });
         }
 
         // POST: Categories/Delete/5
@@ -109,19 +146,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+            _categoryService.Delete(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

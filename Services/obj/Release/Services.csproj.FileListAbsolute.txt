@@ -1,0 +1,14 @@
+D:\work\repos\FinalProject\Services\bin\Release\Services.dll
+D:\work\repos\FinalProject\Services\bin\Release\Services.pdb
+D:\work\repos\FinalProject\Services\bin\Release\DataAccess.dll
+D:\work\repos\FinalProject\Services\bin\Release\Entities.dll
+D:\work\repos\FinalProject\Services\bin\Release\EntityFramework.dll
+D:\work\repos\FinalProject\Services\bin\Release\DataAccess.pdb
+D:\work\repos\FinalProject\Services\bin\Release\DataAccess.dll.config
+D:\work\repos\FinalProject\Services\bin\Release\Entities.pdb
+D:\work\repos\FinalProject\Services\bin\Release\Entities.dll.config
+D:\work\repos\FinalProject\Services\bin\Release\EntityFramework.xml
+D:\work\repos\FinalProject\Services\obj\Release\Services.csprojAssemblyReference.cache
+D:\work\repos\FinalProject\Services\obj\Release\Services.csproj.CopyComplete
+D:\work\repos\FinalProject\Services\obj\Release\Services.dll
+D:\work\repos\FinalProject\Services\obj\Release\Services.pdb
