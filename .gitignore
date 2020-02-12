@@ -3,3 +3,11 @@
 ################################################################################
 
 packages
+/.vs/FinalProject
+/DataAccess/bin/Debug
+/DataAccess/obj/Debug
+/Entities/bin/Debug
+/Entities/obj/Debug
+/Services/bin/Debug
+/Services/obj/Debug
+/Web/obj/Debug
