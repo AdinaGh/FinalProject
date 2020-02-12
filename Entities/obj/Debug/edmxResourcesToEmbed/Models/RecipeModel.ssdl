@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RecipesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="text" Nullable="false" />
+    <Property Name="RecipeId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cuisine">
+    <Key>
+      <PropertyRef Name="CuisineId" />
+    </Key>
+    <Property Name="CuisineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dificulty">
+    <Key>
+      <PropertyRef Name="DificultyId" />
+    </Key>
+    <Property Name="DificultyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Occasion">
+    <Key>
+      <PropertyRef Name="OccasionId" />
+    </Key>
+    <Property Name="OccasionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="RecipeId" />
+    </Key>
+    <Property Name="RecipeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreatedUserId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CuisineId" Type="int" Nullable="false" />
+    <Property Name="DificultyId" Type="int" Nullable="false" />
+    <Property Name="ImageUrl" Type="nvarchar(max)" />
+    <Property Name="Notes" Type="ntext" />
+    <Property Name="PreparationMinutes" Type="int" />
+    <Property Name="TotalMinutes" Type="int" />
+    <Property Name="Serves" Type="int" />
+  </EntityType>
+  <EntityType Name="RecipeCategory">
+    <Key>
+      <PropertyRef Name="RecipeCategoryId" />
+    </Key>
+    <Property Name="RecipeCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecipeId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RecipeIngredient">
+    <Key>
+      <PropertyRef Name="RecipeIngredientId" />
+    </Key>
+    <Property Name="RecipeIngredientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecipeId" Type="int" Nullable="false" />
+    <Property Name="Ingredient" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RecipeOccasion">
+    <Key>
+      <PropertyRef Name="RecipeOccasionId" />
+    </Key>
+    <Property Name="RecipeOccasionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecipeId" Type="int" Nullable="false" />
+    <Property Name="OccasionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RecipeStep">
+    <Key>
+      <PropertyRef Name="RecipeStepId" />
+    </Key>
+    <Property Name="RecipeStepId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecipeId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="Step" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRating">
+    <Key>
+      <PropertyRef Name="UserRatingId" />
+    </Key>
+    <Property Name="UserRatingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecipeId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Rating" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Comment_Recipe">
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Cuisine">
+    <End Role="Cuisine" Type="Self.Cuisine" Multiplicity="1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuisine">
+        <PropertyRef Name="CuisineId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="CuisineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Dificulty">
+    <End Role="Dificulty" Type="Self.Dificulty" Multiplicity="1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dificulty">
+        <PropertyRef Name="DificultyId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="DificultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeCategory_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="RecipeCategory" Type="Self.RecipeCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="RecipeCategory">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeCategory_Recipe">
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+    <End Role="RecipeCategory" Type="Self.RecipeCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Principal>
+      <Dependent Role="RecipeCategory">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeIngredient_Recipe">
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+    <End Role="RecipeIngredient" Type="Self.RecipeIngredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Principal>
+      <Dependent Role="RecipeIngredient">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeOccasion_Occasion">
+    <End Role="Occasion" Type="Self.Occasion" Multiplicity="1" />
+    <End Role="RecipeOccasion" Type="Self.RecipeOccasion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Occasion">
+        <PropertyRef Name="OccasionId" />
+      </Principal>
+      <Dependent Role="RecipeOccasion">
+        <PropertyRef Name="OccasionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeOccasion_Recipe">
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+    <End Role="RecipeOccasion" Type="Self.RecipeOccasion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Principal>
+      <Dependent Role="RecipeOccasion">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeStep_Recipe">
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+    <End Role="RecipeStep" Type="Self.RecipeStep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Principal>
+      <Dependent Role="RecipeStep">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRating_Recipe">
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+    <End Role="UserRating" Type="Self.UserRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Principal>
+      <Dependent Role="UserRating">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RecipesModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cuisine" EntityType="Self.Cuisine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dificulty" EntityType="Self.Dificulty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Occasion" EntityType="Self.Occasion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecipeCategory" EntityType="Self.RecipeCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecipeIngredient" EntityType="Self.RecipeIngredient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecipeOccasion" EntityType="Self.RecipeOccasion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecipeStep" EntityType="Self.RecipeStep" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRating" EntityType="Self.UserRating" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Comment_Recipe" Association="Self.FK_Comment_Recipe">
+      <End Role="Recipe" EntitySet="Recipe" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Cuisine" Association="Self.FK_Recipe_Cuisine">
+      <End Role="Cuisine" EntitySet="Cuisine" />
+      <End Role="Recipe" EntitySet="Recipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Dificulty" Association="Self.FK_Recipe_Dificulty">
+      <End Role="Dificulty" EntitySet="Dificulty" />
+      <End Role="Recipe" EntitySet="Recipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeCategory_Category" Association="Self.FK_RecipeCategory_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="RecipeCategory" EntitySet="RecipeCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeCategory_Recipe" Association="Self.FK_RecipeCategory_Recipe">
+      <End Role="Recipe" EntitySet="Recipe" />
+      <End Role="RecipeCategory" EntitySet="RecipeCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeIngredient_Recipe" Association="Self.FK_RecipeIngredient_Recipe">
+      <End Role="Recipe" EntitySet="Recipe" />
+      <End Role="RecipeIngredient" EntitySet="RecipeIngredient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeOccasion_Occasion" Association="Self.FK_RecipeOccasion_Occasion">
+      <End Role="Occasion" EntitySet="Occasion" />
+      <End Role="RecipeOccasion" EntitySet="RecipeOccasion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeOccasion_Recipe" Association="Self.FK_RecipeOccasion_Recipe">
+      <End Role="Recipe" EntitySet="Recipe" />
+      <End Role="RecipeOccasion" EntitySet="RecipeOccasion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeStep_Recipe" Association="Self.FK_RecipeStep_Recipe">
+      <End Role="Recipe" EntitySet="Recipe" />
+      <End Role="RecipeStep" EntitySet="RecipeStep" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRating_Recipe" Association="Self.FK_UserRating_Recipe">
+      <End Role="Recipe" EntitySet="Recipe" />
+      <End Role="UserRating" EntitySet="UserRating" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

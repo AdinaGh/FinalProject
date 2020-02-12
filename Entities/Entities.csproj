@@ -101,32 +101,30 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <EntityDeploy Include="Models\RecipeModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>RecipeModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
     <None Include="Models\RecipeModel.edmx.diagram">
       <DependentUpon>RecipeModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Models\RecipeModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RecipeModel.Context.cs</LastGenOutput>
       <DependentUpon>RecipeModel.edmx</DependentUpon>
+      <LastGenOutput>RecipeModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\RecipeModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RecipeModel.edmx</DependentUpon>
       <LastGenOutput>RecipeModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

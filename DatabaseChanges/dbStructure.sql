@@ -56,7 +56,12 @@ CREATE TABLE Recipe
 	CreatedUserId int NOT NULL,
 	CreatedDate datetime NOT NULL,
 	CuisineId int NOT NULL,
-	DificultyId int NOT NULL
+	DificultyId int NOT NULL,
+	ImageUrl nvarchar(MAX) NULL,
+	Notes ntext NULL,
+	PreparationMinutes int NULL,
+	TotalMinutes int NULL,
+	Serves int NULL
 	)  ON [PRIMARY]
 GO
 ALTER TABLE Recipe ADD CONSTRAINT

@@ -51,6 +51,11 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CuisineId" Type="int" Nullable="false" />
           <Property Name="DificultyId" Type="int" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="PreparationMinutes" Type="int" />
+          <Property Name="TotalMinutes" Type="int" />
+          <Property Name="Serves" Type="int" />
         </EntityType>
         <EntityType Name="RecipeCategory">
           <Key>
@@ -323,6 +328,11 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CuisineId" Type="Int32" Nullable="false" />
           <Property Name="DificultyId" Type="Int32" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreparationMinutes" Type="Int32" />
+          <Property Name="TotalMinutes" Type="Int32" />
+          <Property Name="Serves" Type="Int32" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Recipe" FromRole="Recipe" ToRole="Comment" />
           <NavigationProperty Name="Cuisine" Relationship="Self.FK_Recipe_Cuisine" FromRole="Recipe" ToRole="Cuisine" />
           <NavigationProperty Name="Dificulty" Relationship="Self.FK_Recipe_Dificulty" FromRole="Recipe" ToRole="Dificulty" />
@@ -501,7 +511,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="RecipesDataContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Cuisines" EntityType="Self.Cuisine" />
@@ -559,7 +569,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="RecipesModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="RecipesModelStoreContainer" CdmEntityContainer="RecipesDataContext">
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="RecipesModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -610,6 +620,11 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CuisineId" ColumnName="CuisineId" />
                 <ScalarProperty Name="DificultyId" ColumnName="DificultyId" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="PreparationMinutes" ColumnName="PreparationMinutes" />
+                <ScalarProperty Name="TotalMinutes" ColumnName="TotalMinutes" />
+                <ScalarProperty Name="Serves" ColumnName="Serves" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
