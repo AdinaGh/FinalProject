@@ -28,16 +28,17 @@ textarea {
     width: 100px;
 }
 
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     .hide-small{
         display:none;
     }
-}
+}*/
 
 .top-menu > ul {
     margin: 0;
     padding-left: 0;
     list-style: none;
+    display:inline-block;
 }
 
 .top-menu > ul > li {
@@ -56,4 +57,13 @@ div.top-menu {
     vertical-align: middle;
     display: inline;
     float: unset;
+}
+
+div.recipe-details{
+    height:250px;
+}
+
+div.recipe-box {
+    border: solid 1px gainsboro;
+    margin-bottom: 20px;
 }

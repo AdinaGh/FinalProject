@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RecipesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="RecipesDataContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -51,11 +51,12 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CuisineId" Type="int" Nullable="false" />
           <Property Name="DificultyId" Type="int" Nullable="false" />
-          <Property Name="ImageUrl" Type="nvarchar(max)" />
           <Property Name="Notes" Type="ntext" />
           <Property Name="PreparationMinutes" Type="int" />
           <Property Name="TotalMinutes" Type="int" />
           <Property Name="Serves" Type="int" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="RecipeCategory">
           <Key>
@@ -219,7 +220,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RecipesModelStoreContainer">
+        <EntityContainer Name="RecipesDataContextStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuisine" EntityType="Self.Cuisine" Schema="dbo" store:Type="Tables" />
@@ -276,7 +277,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="RecipesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="RecipesDataContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -328,11 +329,12 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CuisineId" Type="Int32" Nullable="false" />
           <Property Name="DificultyId" Type="Int32" Nullable="false" />
-          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PreparationMinutes" Type="Int32" />
           <Property Name="TotalMinutes" Type="Int32" />
           <Property Name="Serves" Type="Int32" />
+          <Property Name="ImageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Recipe" FromRole="Recipe" ToRole="Comment" />
           <NavigationProperty Name="Cuisine" Relationship="Self.FK_Recipe_Cuisine" FromRole="Recipe" ToRole="Cuisine" />
           <NavigationProperty Name="Dificulty" Relationship="Self.FK_Recipe_Dificulty" FromRole="Recipe" ToRole="Dificulty" />
@@ -511,7 +513,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RecipesDataContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Cuisines" EntityType="Self.Cuisine" />
@@ -569,9 +571,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="RecipesModelStoreContainer" CdmEntityContainer="RecipesDataContext">
+        <EntityContainerMapping StorageEntityContainer="RecipesDataContextStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="RecipesModel.Category">
+            <EntityTypeMapping TypeName="RecipesDataContext.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -579,7 +581,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="RecipesModel.Comment">
+            <EntityTypeMapping TypeName="RecipesDataContext.Comment">
               <MappingFragment StoreEntitySet="Comment">
                 <ScalarProperty Name="CommentId" ColumnName="CommentId" />
                 <ScalarProperty Name="Comment1" ColumnName="Comment" />
@@ -589,7 +591,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cuisines">
-            <EntityTypeMapping TypeName="RecipesModel.Cuisine">
+            <EntityTypeMapping TypeName="RecipesDataContext.Cuisine">
               <MappingFragment StoreEntitySet="Cuisine">
                 <ScalarProperty Name="CuisineId" ColumnName="CuisineId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -597,7 +599,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Dificulties">
-            <EntityTypeMapping TypeName="RecipesModel.Dificulty">
+            <EntityTypeMapping TypeName="RecipesDataContext.Dificulty">
               <MappingFragment StoreEntitySet="Dificulty">
                 <ScalarProperty Name="DificultyId" ColumnName="DificultyId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -605,7 +607,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Occasions">
-            <EntityTypeMapping TypeName="RecipesModel.Occasion">
+            <EntityTypeMapping TypeName="RecipesDataContext.Occasion">
               <MappingFragment StoreEntitySet="Occasion">
                 <ScalarProperty Name="OccasionId" ColumnName="OccasionId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -613,23 +615,24 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Recipes">
-            <EntityTypeMapping TypeName="RecipesModel.Recipe">
+            <EntityTypeMapping TypeName="RecipesDataContext.Recipe">
               <MappingFragment StoreEntitySet="Recipe">
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
                 <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CuisineId" ColumnName="CuisineId" />
                 <ScalarProperty Name="DificultyId" ColumnName="DificultyId" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="PreparationMinutes" ColumnName="PreparationMinutes" />
                 <ScalarProperty Name="TotalMinutes" ColumnName="TotalMinutes" />
                 <ScalarProperty Name="Serves" ColumnName="Serves" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecipeCategories">
-            <EntityTypeMapping TypeName="RecipesModel.RecipeCategory">
+            <EntityTypeMapping TypeName="RecipesDataContext.RecipeCategory">
               <MappingFragment StoreEntitySet="RecipeCategory">
                 <ScalarProperty Name="RecipeCategoryId" ColumnName="RecipeCategoryId" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
@@ -638,7 +641,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecipeIngredients">
-            <EntityTypeMapping TypeName="RecipesModel.RecipeIngredient">
+            <EntityTypeMapping TypeName="RecipesDataContext.RecipeIngredient">
               <MappingFragment StoreEntitySet="RecipeIngredient">
                 <ScalarProperty Name="RecipeIngredientId" ColumnName="RecipeIngredientId" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
@@ -647,7 +650,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecipeOccasions">
-            <EntityTypeMapping TypeName="RecipesModel.RecipeOccasion">
+            <EntityTypeMapping TypeName="RecipesDataContext.RecipeOccasion">
               <MappingFragment StoreEntitySet="RecipeOccasion">
                 <ScalarProperty Name="RecipeOccasionId" ColumnName="RecipeOccasionId" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
@@ -656,7 +659,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecipeSteps">
-            <EntityTypeMapping TypeName="RecipesModel.RecipeStep">
+            <EntityTypeMapping TypeName="RecipesDataContext.RecipeStep">
               <MappingFragment StoreEntitySet="RecipeStep">
                 <ScalarProperty Name="RecipeStepId" ColumnName="RecipeStepId" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
@@ -666,7 +669,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRatings">
-            <EntityTypeMapping TypeName="RecipesModel.UserRating">
+            <EntityTypeMapping TypeName="RecipesDataContext.UserRating">
               <MappingFragment StoreEntitySet="UserRating">
                 <ScalarProperty Name="UserRatingId" ColumnName="UserRatingId" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />

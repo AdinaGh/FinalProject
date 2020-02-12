@@ -1,81 +1,38 @@
 ﻿@model IEnumerable<Entities.Models.Recipe>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Recipes";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedUserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Notes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PreparationMinutes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalMinutes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Serves)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuisine.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dificulty.Name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            <img alt="no image" src="@Url.Content("~/UploadedFiles/Recipes/"+ item.ImageUrl)" width="100" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PreparationMinutes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalMinutes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Serves)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cuisine.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dificulty.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RecipeId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RecipeId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RecipeId })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="container">
+    @{var idx = 0;
+        foreach (var item in Model)
+        {
+            if (idx % 3 == 0)
+            {
+                <text>
+                    <div class="row">
+                </text>
+            }
+                        <div class="col-md-4">
+                            <div class="recipe-box">
+                                <a href="@Url.Action("Details", "Recipes", new { id = item.RecipeId })">
+                                    <div class="recipe-details">
+                                        @if (item.ImageUrl != null)
+                                        {
+                                            <img class="img-thumbnail" alt="no image" width="313"
+                                                 src="@Url.Content("~/UploadedFiles/Recipes/" + item.ImageUrl)" />
+                                        }
+                                    </div>
+                                </a>
+                                <h2>
+                                    <span class="label label-warning">@Html.DisplayFor(modelItem => item.Title)</span>
+                                </h2>
+                            </div>
+                        </div>
+            idx++;
+        }
+    }
+</div>

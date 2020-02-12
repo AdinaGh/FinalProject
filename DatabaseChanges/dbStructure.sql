@@ -57,11 +57,12 @@ CREATE TABLE Recipe
 	CreatedDate datetime NOT NULL,
 	CuisineId int NOT NULL,
 	DificultyId int NOT NULL,
-	ImageUrl nvarchar(MAX) NULL,
+	ImageUrl nvarchar(50) NULL,
 	Notes ntext NULL,
 	PreparationMinutes int NULL,
 	TotalMinutes int NULL,
-	Serves int NULL
+	Serves int NULL,
+	Title nvarchar(200) NOT NULL
 	)  ON [PRIMARY]
 GO
 ALTER TABLE Recipe ADD CONSTRAINT
@@ -92,6 +93,9 @@ ALTER TABLE Recipe ADD CONSTRAINT
 	) ON UPDATE  NO ACTION 
 	 ON DELETE  NO ACTION 
 	
+GO
+ALTER TABLE Recipe ADD CONSTRAINT
+	DF_Recipe_CreatedDate DEFAULT getdate() FOR CreatedDate
 GO
 CREATE TABLE RecipeStep
 	(

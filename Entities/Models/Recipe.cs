@@ -30,11 +30,12 @@ namespace Entities.Models
         public System.DateTime CreatedDate { get; set; }
         public int CuisineId { get; set; }
         public int DificultyId { get; set; }
-        public string ImageUrl { get; set; }
         public string Notes { get; set; }
         public Nullable<int> PreparationMinutes { get; set; }
         public Nullable<int> TotalMinutes { get; set; }
         public Nullable<int> Serves { get; set; }
+        public string ImageUrl { get; set; }
+        public string Title { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }

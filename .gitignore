@@ -12,3 +12,4 @@ packages
 /Services/obj/Debug
 /Web/obj/Debug
 /Web/bin
+/Entities/Entities.csproj.user
