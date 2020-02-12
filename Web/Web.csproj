@@ -173,6 +173,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="StaticFiles\cookbook.svg" />
+    <Content Include="StaticFiles\logo1.png" />
     <Content Include="UploadedFiles\Recipes\1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

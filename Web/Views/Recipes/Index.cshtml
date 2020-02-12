@@ -1,38 +1,40 @@
 ﻿@model IEnumerable<Entities.Models.Recipe>
 
 @{
-    ViewBag.Title = "Recipes";
+    ViewBag.Title = "Retete";
 }
 
 <h2>@ViewBag.Title</h2>
 
 <div class="container">
-    @{var idx = 0;
-        foreach (var item in Model)
+    @for (var i = 0; i < Model.Count(); i += 3)
+    {
+
+    <div class="row">
+        @for (var j = 0; j < 3; j++)
         {
-            if (idx % 3 == 0)
+            if (i + j >= Model.Count())
             {
-                <text>
-                    <div class="row">
-                </text>
+                break;
             }
-                        <div class="col-md-4">
-                            <div class="recipe-box">
-                                <a href="@Url.Action("Details", "Recipes", new { id = item.RecipeId })">
-                                    <div class="recipe-details">
-                                        @if (item.ImageUrl != null)
-                                        {
-                                            <img class="img-thumbnail" alt="no image" width="313"
-                                                 src="@Url.Content("~/UploadedFiles/Recipes/" + item.ImageUrl)" />
-                                        }
-                                    </div>
-                                </a>
-                                <h2>
-                                    <span class="label label-warning">@Html.DisplayFor(modelItem => item.Title)</span>
-                                </h2>
-                            </div>
+            var item = Model.Skip(i + j).Take(1).FirstOrDefault();
+            <div class="col-md-4">
+                <div class="recipe-box">
+                    <a href="@Url.Action("Details", "Recipes", new { id = item.RecipeId })">
+                        <div class="recipe-details">
+                            @if (item.ImageUrl != null)
+                            {
+                                <img class="img-thumbnail" alt="no image" width="313"
+                                     src="@Url.Content("~/UploadedFiles/Recipes/" + item.ImageUrl)" />
+                            }
                         </div>
-            idx++;
+                    </a>
+                    <h2>
+                        <span class="label label-warning">@Html.DisplayFor(modelItem => item.Title)</span>
+                    </h2>
+                </div>
+            </div>
         }
+    </div>
     }
 </div>
