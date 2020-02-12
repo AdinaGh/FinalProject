@@ -12,7 +12,7 @@ namespace Web.Controllers
 {
     public class RecipesController : Controller
     {
-        private RecipesEntities db = new RecipesEntities();
+        private RecipesDataContext db = new RecipesDataContext();
 
         // GET: Recipes
         public ActionResult Index()

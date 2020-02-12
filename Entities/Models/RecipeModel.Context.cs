@@ -13,9 +13,9 @@ namespace Entities.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RecipesEntities : DbContext
+    public partial class RecipesDataContext : DbContext
     {
-        public RecipesEntities()
+        public RecipesDataContext()
             : base("name=RecipesEntities")
         {
         }

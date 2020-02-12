@@ -11,8 +11,8 @@ namespace DataAccess
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly RecipesEntities _context;
-        public CategoryRepository(RecipesEntities context)
+        private readonly RecipesDataContext _context;
+        public CategoryRepository(RecipesDataContext context)
         {
             _context = context;
         }
