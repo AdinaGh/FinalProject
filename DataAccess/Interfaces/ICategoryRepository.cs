@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Interfaces
 {
-    public interface ICategoryRepository: IDisposable
+    public interface ICategoryRepository: IRepository<Category>
     {
-        IEnumerable<Category> GetAll();
-        Category GetById(int id);
-        void Add(Category category);
-        void Update(Category category);
-        void Remove(Category category);
+     
     }
 }

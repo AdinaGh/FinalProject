@@ -67,3 +67,8 @@ div.recipe-box {
     border: solid 1px gainsboro;
     margin-bottom: 20px;
 }
+
+
+img.recipe-full-img{
+    max-height:500px;
+}

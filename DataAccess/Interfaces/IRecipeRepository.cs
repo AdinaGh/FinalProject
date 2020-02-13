@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Interfaces
+namespace DataAccess.Interfaces
 {
-    public interface ICategoryService: IService<Category>, IDisposable
+    public interface IRecipeRepository: IRepository<Recipe>
     {
     }
 }

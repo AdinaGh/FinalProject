@@ -28,6 +28,11 @@ namespace Services
             _categoriesRepository.Remove(category);
         }
 
+        public void Dispose()
+        {
+            _categoriesRepository.Dispose();
+        }
+
         public IEnumerable<Category> GetAll()
         {
             return _categoriesRepository.GetAll();

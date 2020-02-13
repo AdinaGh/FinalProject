@@ -149,5 +149,14 @@ namespace Web.Controllers
             _categoryService.Delete(id);
             return RedirectToAction("Index");
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _categoryService.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

@@ -161,6 +161,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\RecipeViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -173,8 +174,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="StaticFiles\cookbook.svg" />
-    <Content Include="StaticFiles\logo1.png" />
+    <Content Include="StaticFiles\Images\cookbook.svg" />
+    <Content Include="StaticFiles\Images\logo1.png" />
+    <Content Include="StaticFiles\Scripts\recipe.js" />
     <Content Include="UploadedFiles\Recipes\1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -189,9 +191,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="StaticFiles\fb.jpg" />
-    <Content Include="StaticFiles\fb2.png" />
-    <Content Include="StaticFiles\logo.jpg" />
+    <Content Include="StaticFiles\Images\fb.jpg" />
+    <Content Include="StaticFiles\Images\fb2.png" />
+    <Content Include="StaticFiles\Images\logo.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

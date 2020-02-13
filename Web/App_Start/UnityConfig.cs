@@ -45,9 +45,10 @@ namespace Web
             // container.LoadConfiguration();
 
             // TODO: Register your type's mappings here.
-            // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<ICategoryRepository, CategoryRepository>();
             container.RegisterType<ICategoryService, CategoryService>();
+            container.RegisterType<IRecipeRepository, RecipeRepository>();
+            container.RegisterType<IRecipeService, RecipeService>();
         }
     }
 }

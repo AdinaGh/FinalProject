@@ -7,18 +7,31 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Entities.Models;
+using Services.Interfaces;
+using Web.Models;
 
 namespace Web.Controllers
 {
     public class RecipesController : Controller
     {
-        private RecipesDataContext db = new RecipesDataContext();
+        private IRecipeService _recipeService;
 
+        public RecipesController(IRecipeService recipeService)
+        {
+            _recipeService = recipeService;
+        }
         // GET: Recipes
         public ActionResult Index()
         {
-            var recipes = db.Recipes.Include(r => r.Cuisine).Include(r => r.Dificulty);
-            return View(recipes.ToList());
+            var recipes = _recipeService
+                .GetAll()
+                .Select(ca => new RecipeViewModel()
+                {
+                    RecipeId = ca.RecipeId,
+                    ImageUrl = ca.ImageUrl,
+                    Title = ca.Title
+                });
+            return View(recipes);
         }
 
         // GET: Recipes/Details/5
@@ -28,19 +41,23 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recipe recipe = db.Recipes.Find(id);
+            var recipe = _recipeService.GetById(id.Value);
             if (recipe == null)
             {
                 return HttpNotFound();
             }
+            //return View(new RecipeViewModel()
+            //{
+            //    RecipeId = recipe.RecipeId,
+            //    ImageUrl = recipe.ImageUrl,
+            //    Title = recipe.Title
+            //});
             return View(recipe);
         }
 
         // GET: Recipes/Create
         public ActionResult Create()
         {
-            ViewBag.CuisineId = new SelectList(db.Cuisines, "CuisineId", "Name");
-            ViewBag.DificultyId = new SelectList(db.Dificulties, "DificultyId", "Name");
             return View();
         }
 
@@ -49,17 +66,19 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RecipeId,CreatedUserId,CreatedDate,CuisineId,DificultyId,Notes,PreparationMinutes,TotalMinutes,Serves,ImageUrl,Title")] Recipe recipe)
+        public ActionResult Create([Bind(Include = "RecipeId,CreatedUserId,CreatedDate,CuisineId,DificultyId,Notes,PreparationMinutes,TotalMinutes,Serves,ImageUrl,Title")] RecipeViewModel recipe)
         {
             if (ModelState.IsValid)
             {
-                db.Recipes.Add(recipe);
-                db.SaveChanges();
+                _recipeService.Add(new Recipe()
+                {
+                    RecipeId = recipe.RecipeId,
+                    Title = recipe.Title,
+                    ImageUrl = recipe.ImageUrl
+                }); 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CuisineId = new SelectList(db.Cuisines, "CuisineId", "Name", recipe.CuisineId);
-            ViewBag.DificultyId = new SelectList(db.Dificulties, "DificultyId", "Name", recipe.DificultyId);
             return View(recipe);
         }
 
@@ -70,14 +89,17 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recipe recipe = db.Recipes.Find(id);
+            var recipe = _recipeService.GetById(id.Value);
             if (recipe == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CuisineId = new SelectList(db.Cuisines, "CuisineId", "Name", recipe.CuisineId);
-            ViewBag.DificultyId = new SelectList(db.Dificulties, "DificultyId", "Name", recipe.DificultyId);
-            return View(recipe);
+            return View(new RecipeViewModel()
+            {
+                RecipeId = recipe.RecipeId,
+                ImageUrl = recipe.ImageUrl,
+                Title = recipe.Title
+            });
         }
 
         // POST: Recipes/Edit/5
@@ -89,12 +111,14 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recipe).State = EntityState.Modified;
-                db.SaveChanges();
+                _recipeService.Update(new Recipe()
+                {
+                    RecipeId = recipe.RecipeId,
+                    ImageUrl = recipe.ImageUrl,
+                    Title = recipe.Title
+                });
                 return RedirectToAction("Index");
             }
-            ViewBag.CuisineId = new SelectList(db.Cuisines, "CuisineId", "Name", recipe.CuisineId);
-            ViewBag.DificultyId = new SelectList(db.Dificulties, "DificultyId", "Name", recipe.DificultyId);
             return View(recipe);
         }
 
@@ -105,12 +129,17 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recipe recipe = db.Recipes.Find(id);
+            var recipe = _recipeService.GetById(id.Value);
             if (recipe == null)
             {
                 return HttpNotFound();
             }
-            return View(recipe);
+            return View(new RecipeViewModel()
+            {
+                Title = recipe.Title,
+                RecipeId = recipe.RecipeId,
+                ImageUrl= recipe.ImageUrl
+            });
         }
 
         // POST: Recipes/Delete/5
@@ -118,9 +147,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Recipe recipe = db.Recipes.Find(id);
-            db.Recipes.Remove(recipe);
-            db.SaveChanges();
+            _recipeService.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -128,7 +155,7 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _recipeService.Dispose();
             }
             base.Dispose(disposing);
         }
