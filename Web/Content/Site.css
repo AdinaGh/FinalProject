@@ -85,3 +85,7 @@ div.tab-recipes hr{
 .stars-orange .glyphicon {
     color: orange;
 }
+
+.recipe-details-rpane .row{
+    margin-top:10px;
+}
