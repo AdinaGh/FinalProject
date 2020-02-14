@@ -1,4 +1,7 @@
 ﻿@model Entities.Models.Recipe
+@{
+    ViewBag.Title = "Details";
+}
 @section Scripts
 {
     <script src="@Url.Content("~/StaticFiles/Scripts/recipe.js")"></script>
@@ -8,22 +11,66 @@
     <div class="col-xs-12">
         <h2>@Model.Title</h2>
     </div>
-    <div class="col-xs-6">
+</div>
+<div class="row">
+    <div class="col-xs-5">
         <img class="img-thumbnail recipe-full-img" alt="no image"
              src="@Url.Content("~/UploadedFiles/Recipes/" + Model.ImageUrl)" />
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-7">
         <div class="row">
-            prep
+            <div class="col-xs-2">
+                <strong>Prep time:</strong>
+            </div>
+            <div class="col-xs-10">
+                @Html.DisplayFor(model => model.PreparationMinutes)
+                &nbsp;minutes
+            </div>
         </div>
         <div class="row">
-            cook
+            <div class="col-xs-2">
+                <strong>Total time:</strong>
+            </div>
+            <div class="col-xs-10">
+                @Html.DisplayFor(model => model.TotalMinutes)
+                &nbsp;minutes
+            </div>
         </div>
         <div class="row">
-            serves
+            <div class="col-xs-2">
+                <strong>Serves:</strong>
+            </div>
+            <div class="col-xs-10">
+                @Html.DisplayFor(model => model.Serves)
+            </div>
         </div>
         <div class="row">
-            rated
+            <div class="col-xs-2">
+                <strong>Difficulty:</strong>
+            </div>
+            <div class="col-xs-10">
+                Easy
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <strong>Cuisine:</strong>
+            </div>
+            <div class="col-xs-10">
+                Asian
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <strong>Rated:</strong>
+            </div>
+            <div class="col-xs-10 stars-orange">
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star-empty"></span>
+                <span class="glyphicon glyphicon-star-empty"></span>
+            </div>
         </div>
 
     </div>
@@ -31,29 +78,76 @@
 <hr />
 <div class="row clearfix">
     <div class="col-xs-12">
-        <div class="col-xs-1">
-            Added By:
+        <div class="col-xs-2">
+            <strong>Added By:</strong>
         </div>
-        <div class="col-xs-11">
-            @Html.DisplayNameFor(model => model.CreatedUserId)
+        <div class="col-xs-10">
+            @*@Html.DisplayFor(model => model.CreatedUserId)*@
+            John
         </div>
     </div>
 </div>
 
 <div>
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-pills" role="tablist">
         <li role="presentation" class="active"><a href="#recipe" aria-controls="recipe" role="tab" data-toggle="tab">Recipe</a></li>
+        <li role="presentation"><a href="#tips" aria-controls="tips" role="tab" data-toggle="tab">Tips & Hints</a></li>
         <li role="presentation"><a href="#review" aria-controls="review" role="tab" data-toggle="tab">Review</a></li>
-        <li role="presentation"><a href="#nutrition" aria-controls="nutrition" role="tab" data-toggle="tab">Nutrition</a></li>
     </ul>
 </div>
 
-<div id="myTabContent" class="tab-content">
+<div class="tab-content tab-recipes">
     <div role="tabpanel" class="tab-pane fade active in" id="recipe" aria-labelledby="home-tab">
-        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+        <div class="well">
+            <h3>@Model.Title</h3>
+            <hr />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class=" row text-uppercase">ingredients:</div>
+                    <div class="row">
+                        <p>
+                            2 long green chillies, deseeded
+                            3cm piece of ginger
+                            1 cup coriander leaves
+                            2 garlic cloved, peeled
+                            2 tablespoons fresh lime juice
+                            3/4 cup coconut cream
+                            4 thick Atlantic salmon (skin on), boned
+                            1/2 quantity Green Chilli & Coconut Marinade
+                            Steamed greens, lime wedges, jasmine rice, coriander leaves and sliced red chilli to serv
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class=" row text-uppercase">method:</div>
+                    <div class="row">
+                        <p>
+                            We used the Breville Boss To Go blender to make this marinade.
+                            Combine all Marinade ingredients into a Breville Boss to Go Blender. Pulse for 5 - 10 seconds until smooth. (makes 1 cup)
+                            Preheat oven to 200°C/180°C fan forced
+                            Cut 4 x 30cm sheets of baking paper. Place a piece of salmon into the centre of each sheet
+                            Top each with 2 tablespoons green chilli & coconut marinade. Fold paper to enclose fish. Transfer to a baking tray
+                            Roast for 12 minutes or until fish is just cooked through
+                            Serve with steamed greens, lime wedges, jasmine rice, coriander leaves and sliced red chilli
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="tips" aria-labelledby="profile-tab">
+        <div class="well">
+            <h3>Tips & Hints</h3>
+            <hr />
+            <div class="row">
+                <p>@Html.DisplayNameFor(model => model.Notes)</p>
+            </div>
+        </div>
     </div>
     <div role="tabpanel" class="tab-pane fade" id="review" aria-labelledby="profile-tab">
-        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+        <p>todo review</p>
     </div>
 </div>
 
@@ -65,13 +159,9 @@
 
 
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
 
-<div>
+<div class="hidden">
     <h4>Recipe</h4>
     <hr />
     <dl class="dl-horizontal">

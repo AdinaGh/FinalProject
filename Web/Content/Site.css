@@ -72,3 +72,16 @@ div.recipe-box {
 img.recipe-full-img{
     max-height:500px;
 }
+
+div.tab-recipes hr{
+    border:1px solid gray;
+}
+
+.recipe-details img {
+    height: 313px;
+    width: 359px;
+}
+
+.stars-orange .glyphicon {
+    color: orange;
+}
