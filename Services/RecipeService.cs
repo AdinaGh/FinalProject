@@ -12,9 +12,11 @@ namespace Services
     public class RecipeService : IRecipeService
     {
         private IRecipeRepository _recipesRepository;
-        public RecipeService(IRecipeRepository recipesRepository)
+        private IRecipeCategoryRepository _recipeCategoryRepository;
+        public RecipeService(IRecipeRepository recipesRepository, IRecipeCategoryRepository recipeCategoryRepository)
         {
             _recipesRepository = recipesRepository;
+            _recipeCategoryRepository = recipeCategoryRepository;
         }
         public void Add(Recipe recipe)
         {
@@ -29,6 +31,7 @@ namespace Services
 
         public void Dispose()
         {
+            _recipeCategoryRepository.Dispose();
             _recipesRepository.Dispose();
         }
 
@@ -40,6 +43,16 @@ namespace Services
         public Recipe GetById(int id)
         {
             return _recipesRepository.GetById(id);
+        }
+
+        public Recipe GetByIdIncludeCategory(int id)
+        {
+            var recipe = GetById(id);
+           var categories = _recipeCategoryRepository.GetByRecipeId(id);
+
+            recipe.RecipeCategories = categories.ToList();
+
+            return recipe;
         }
 
         public void Update(Recipe recipe)

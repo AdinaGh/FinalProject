@@ -105,8 +105,13 @@
         <div class="row text-uppercase">
             <div class="col-xs-12">
                 <h5>
-                    <span class="label label-default">dinner</span>
-                    <span class="label label-default">seafood</span>
+                    @foreach (var item2 in Model.RecipeCategories)
+                    {
+                    <span class="label label-default">
+                        @Html.DisplayFor(modelItem => item2.Category.Name)
+                    </span>
+
+                    }
                 </h5>
             </div>
         </div>

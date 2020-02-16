@@ -9,45 +9,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class RecipeRepository : IRecipeRepository
+    public class RecipeRepository : Repository<Recipe>, IRecipeRepository
     {
-        private readonly RecipesDataContext _context;
-        public RecipeRepository(RecipesDataContext context)
+        public RecipeRepository(RecipesDataContext context) : base(context)
         {
-            _context = context;
-        }
-
-        public void Add(Recipe item)
-        {
-            _context.Recipes.Add(item);
-            _context.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
-
-        public IEnumerable<Recipe> GetAll()
-        {
-            return _context.Recipes.ToList();
-        }
-
-        public Recipe GetById(int id)
-        {
-            return _context.Recipes.Find(id);
-        }
-
-        public void Remove(Recipe item)
-        {
-            _context.Recipes.Remove(item);
-            _context.SaveChanges();
-        }
-
-        public void Update(Recipe item)
-        {
-            _context.Entry(item).State = EntityState.Modified;
-            _context.SaveChanges();
         }
     }
 }

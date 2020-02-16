@@ -41,7 +41,8 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var recipe = _recipeService.GetById(id.Value);
+            var recipe = _recipeService.GetByIdIncludeCategory(id.Value);
+            var abc = recipe.RecipeCategories.ToList();
             if (recipe == null)
             {
                 return HttpNotFound();
