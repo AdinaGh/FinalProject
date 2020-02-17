@@ -14,19 +14,26 @@ namespace Web.Controllers
 {
     public class RecipesController : Controller
     {
-        private IRecipeService _recipeService;
-        private IRecipeIngredientService _recipeIngredientService;
-        private IRecipeCategoryService _recipeCategoryService;
-        private IRecipeOccasionService _recipeOccasionService;
-        private ICuisineService _cuisineService;
-        private IDificultyService _difficultyService;
+        private readonly IRecipeService _recipeService;
+        private readonly IRecipeIngredientService _recipeIngredientService;
+        private readonly IRecipeCategoryService _recipeCategoryService;
+        private readonly IRecipeOccasionService _recipeOccasionService;
+        private readonly IRecipeStepService _recipeStepService;
+        private readonly IUserRatingService _userRatingService;
+        private readonly ICuisineService _cuisineService;
+        private readonly IDificultyService _difficultyService;
+        private readonly ICommentService _commentService;
 
         public RecipesController(IRecipeService recipeService,
             ICuisineService cuisineService,
             IDificultyService difficultyService,
               IRecipeIngredientService recipeIngredientService,
         IRecipeCategoryService recipeCategoryService,
-        IRecipeOccasionService recipeOccasionService
+        IRecipeOccasionService recipeOccasionService,
+        IRecipeStepService recipeStepService,
+        IUserRatingService userRatingService,
+        ICommentService commentService
+
             )
         {
             _recipeService = recipeService;
@@ -35,6 +42,10 @@ namespace Web.Controllers
             _recipeCategoryService = recipeCategoryService;
             _recipeIngredientService = recipeIngredientService;
             _recipeOccasionService = recipeOccasionService;
+
+            _recipeStepService = recipeStepService;
+            _userRatingService = userRatingService;
+            _commentService = commentService;
         }
         // GET: Recipes
         public ActionResult Index()
@@ -162,6 +173,9 @@ namespace Web.Controllers
             _recipeIngredientService.DeleteByRecipe(id);
             _recipeCategoryService.DeleteByRecipe(id);
             _recipeOccasionService.DeleteByRecipe(id);
+            _recipeStepService.DeleteByRecipe(id);
+            _userRatingService.DeleteByRecipe(id);
+            _commentService.DeleteByRecipe(id);
             _recipeService.Delete(id);
             return RedirectToAction("Index");
         }
@@ -170,6 +184,9 @@ namespace Web.Controllers
         {
             if (disposing)
             {
+                _commentService.Dispose();
+                _userRatingService.Dispose();
+                _recipeStepService.Dispose();
                 _recipeCategoryService.Dispose();
                 _recipeIngredientService.Dispose();
                 _recipeOccasionService.Dispose();

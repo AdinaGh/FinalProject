@@ -55,12 +55,13 @@ namespace Web
             container.RegisterType<ICuisineService, CuisineService>();
             container.RegisterType<IDificultyRepository, DificultyRepository>();
             container.RegisterType<IDificultyService, DificultyService>();
-
-            //container.RegisterType<IRecipeOccasionRepository, RecipeOccasionRepository>();
             container.RegisterType<IRecipeOccasionService, RecipeOccasionService>();
-            //container.RegisterType<IRecipeIngredientRepository, RecipeIngredientRepository>();
             container.RegisterType<IRecipeIngredientService, RecipeIngredientService>();
             container.RegisterType<IRecipeCategoryService, RecipeCategoryService>();
+
+            container.RegisterType<IUserRatingService, UserRatingService>();
+            container.RegisterType<IRecipeStepService, RecipeStepService>();
+            container.RegisterType<ICommentService, CommentService>();
 
 
             container.RegisterType(typeof(IRepository<>), typeof(Repository<>), new TransientLifetimeManager());

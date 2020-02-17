@@ -42,16 +42,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryService.cs" />
+    <Compile Include="CommentService.cs" />
     <Compile Include="CuisineService.cs" />
     <Compile Include="DificultyService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
+    <Compile Include="Interfaces\ICommentService.cs" />
     <Compile Include="Interfaces\IDificultyService.cs" />
     <Compile Include="Interfaces\ICuisineService.cs" />
     <Compile Include="Interfaces\IRecipeCategoryService.cs" />
     <Compile Include="Interfaces\IRecipeIngredientService.cs" />
     <Compile Include="Interfaces\IRecipeOccasionService.cs" />
     <Compile Include="Interfaces\IRecipeService.cs" />
+    <Compile Include="Interfaces\IRecipeStepService.cs" />
     <Compile Include="Interfaces\IService.cs" />
+    <Compile Include="Interfaces\IUserRatingService.cs" />
+    <Compile Include="RecipeStepService.cs" />
+    <Compile Include="UserRatingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecipeCategoryService.cs" />
     <Compile Include="RecipeIngredientService.cs" />
