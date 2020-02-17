@@ -89,3 +89,7 @@ div.tab-recipes hr{
 .recipe-details-rpane .row{
     margin-top:10px;
 }
+
+.recipe-details-cat div span.label.label-default {
+    margin-right: 10px;
+}

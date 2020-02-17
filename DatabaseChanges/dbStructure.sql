@@ -128,7 +128,9 @@ CREATE TABLE Comment
 	CommentId int NOT NULL IDENTITY (1, 1),
 	Comment text NOT NULL,
 	RecipeId int NOT NULL,
-	UserId int NOT NULL
+	UserId int NOT NULL,
+	CreatedDate datetime NOT NULL,
+
 	)  ON [PRIMARY]
 	 TEXTIMAGE_ON [PRIMARY]
 GO
@@ -149,6 +151,9 @@ ALTER TABLE Comment ADD CONSTRAINT
 	) ON UPDATE  NO ACTION 
 	 ON DELETE  NO ACTION 
 	
+GO
+ALTER TABLE Comment ADD CONSTRAINT
+	DF_Commnet_CreatedDate DEFAULT getdate() FOR CreatedDate
 GO
 CREATE TABLE UserRating
 	(

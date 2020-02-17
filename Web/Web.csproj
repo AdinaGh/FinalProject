@@ -161,8 +161,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\CuisineModel.cs" />
+    <Compile Include="Models\DificultyModel.cs" />
+    <Compile Include="Models\OccasionModel.cs" />
+    <Compile Include="Models\RecipeCategoryModel.cs" />
+    <Compile Include="Models\RecipeIngredientModel.cs" />
+    <Compile Include="Models\RecipeOccasionModel.cs" />
+    <Compile Include="Models\RecipeStepModel.cs" />
     <Compile Include="Models\RecipeViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\UserRatingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,6 @@ namespace Services.Interfaces
 {
     public interface IRecipeService: IService<Recipe>, IDisposable
     {
-        Recipe GetByIdIncludeCategory(int id);
+        //add custom methods here
     }
 }

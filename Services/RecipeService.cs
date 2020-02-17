@@ -45,16 +45,6 @@ namespace Services
             return _recipesRepository.GetById(id);
         }
 
-        public Recipe GetByIdIncludeCategory(int id)
-        {
-            var recipe = GetById(id);
-           var categories = _recipeCategoryRepository.GetByRecipeId(id);
-
-            recipe.RecipeCategories = categories.ToList();
-
-            return recipe;
-        }
-
         public void Update(Recipe recipe)
         {
             _recipesRepository.Update(recipe);
