@@ -42,7 +42,6 @@ namespace Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var recipe = _recipeService.GetById(id.Value);
-            
             if (recipe == null)
             {
                 return HttpNotFound();
@@ -50,39 +49,6 @@ namespace Web.Controllers
             return View(
                 EntityToView(recipe)
                 );
-        }
-
-        private static RecipeViewModel EntityToView(Recipe recipe)
-        {
-            return new RecipeViewModel()
-            {
-                Cuisine = new CuisineModel() { CuisineId = recipe.Cuisine.CuisineId, Name = recipe.Cuisine.Name },
-                Dificulty = new DificultyModel() { Name = recipe.Dificulty.Name, DificultyId = recipe.Dificulty.DificultyId },
-                Notes = recipe.Notes,
-                PreparationMinutes = recipe.PreparationMinutes,
-                RecipeCategories = recipe.RecipeCategories.Select(rc => new RecipeCategoryModel()
-                {
-                    Category = new CategoryViewModel() { Name = rc.Category.Name, CategoryId = rc.Category.CategoryId },
-                    CategoryId = rc.CategoryId,
-                    RecipeCategoryId = rc.RecipeCategoryId,
-                    RecipeId = rc.RecipeId
-                }).ToList(),
-                ImageUrl = recipe.ImageUrl,
-                Title = recipe.Title,
-                Comments = recipe.Comments.Select(co => new CommentModel() { RecipeId = co.RecipeId, CommentId = co.CommentId, Description = co.Comment1 }).ToList(),
-                RecipeIngredients = recipe.RecipeIngredients.Select(ri => new RecipeIngredientModel() { RecipeId = ri.RecipeId, Ingredient = ri.Ingredient, RecipeIngredientId = ri.RecipeIngredientId }).ToList(),
-                RecipeOccasions = recipe.RecipeOccasions.Select(oc => new RecipeOccasionModel() { 
-                    RecipeId = oc.RecipeId, 
-                    OccasionId = oc.OccasionId, 
-                    RecipeOccasionId = oc.RecipeOccasionId,
-                    Occasion = new OccasionModel() { Name = oc.Occasion.Name, OccasionId = oc.Occasion.OccasionId}
-                
-                }).ToList(),
-                RecipeSteps = recipe.RecipeSteps.OrderBy(st => st.Step).Select(st => new RecipeStepModel() { RecipeId = st.RecipeId, Description = st.Description, RecipeStepId = st.RecipeStepId, Step = st.Step }).ToList(),
-                Serves = recipe.Serves,
-                TotalMinutes = recipe.TotalMinutes,
-                UserRatings = recipe.UserRatings.Select(ur => new UserRatingModel() { RecipeId = ur.RecipeId, Rating = ur.Rating, UserId = ur.UserId, UserRatingId = ur.UserRatingId }).ToList()
-            };
         }
 
         // GET: Recipes/Create
@@ -184,5 +150,40 @@ namespace Web.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private static RecipeViewModel EntityToView(Recipe recipe)
+        {
+            return new RecipeViewModel()
+            {
+                Cuisine = new CuisineModel() { CuisineId = recipe.Cuisine.CuisineId, Name = recipe.Cuisine.Name },
+                Dificulty = new DificultyModel() { Name = recipe.Dificulty.Name, DificultyId = recipe.Dificulty.DificultyId },
+                Notes = recipe.Notes,
+                PreparationMinutes = recipe.PreparationMinutes,
+                RecipeCategories = recipe.RecipeCategories.Select(rc => new RecipeCategoryModel()
+                {
+                    Category = new CategoryViewModel() { Name = rc.Category.Name, CategoryId = rc.Category.CategoryId },
+                    CategoryId = rc.CategoryId,
+                    RecipeCategoryId = rc.RecipeCategoryId,
+                    RecipeId = rc.RecipeId
+                }).ToList(),
+                ImageUrl = recipe.ImageUrl,
+                Title = recipe.Title,
+                Comments = recipe.Comments.Select(co => new CommentModel() { RecipeId = co.RecipeId, CommentId = co.CommentId, Description = co.Comment1 }).ToList(),
+                RecipeIngredients = recipe.RecipeIngredients.Select(ri => new RecipeIngredientModel() { RecipeId = ri.RecipeId, Ingredient = ri.Ingredient, RecipeIngredientId = ri.RecipeIngredientId }).ToList(),
+                RecipeOccasions = recipe.RecipeOccasions.Select(oc => new RecipeOccasionModel()
+                {
+                    RecipeId = oc.RecipeId,
+                    OccasionId = oc.OccasionId,
+                    RecipeOccasionId = oc.RecipeOccasionId,
+                    Occasion = new OccasionModel() { Name = oc.Occasion.Name, OccasionId = oc.Occasion.OccasionId }
+
+                }).ToList(),
+                RecipeSteps = recipe.RecipeSteps.OrderBy(st => st.Step).Select(st => new RecipeStepModel() { RecipeId = st.RecipeId, Description = st.Description, RecipeStepId = st.RecipeStepId, Step = st.Step }).ToList(),
+                Serves = recipe.Serves,
+                TotalMinutes = recipe.TotalMinutes,
+                UserRatings = recipe.UserRatings.Select(ur => new UserRatingModel() { RecipeId = ur.RecipeId, Rating = ur.Rating, UserId = ur.UserId, UserRatingId = ur.UserRatingId }).ToList()
+            };
+        }
+
     }
 }

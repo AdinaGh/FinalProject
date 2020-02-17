@@ -49,7 +49,7 @@
                 <strong>Difficulty:</strong>
             </div>
             <div class="col-xs-10">
-                Easy
+                @Html.DisplayFor(model => model.Dificulty.Name)
             </div>
         </div>
         <div class="row">
@@ -57,10 +57,10 @@
                 <strong>Cuisine:</strong>
             </div>
             <div class="col-xs-10">
-                Asian
+                @Html.DisplayFor(model => model.Cuisine.Name)
             </div>
         </div>
-        <div class="row">
+        <div  class="@("row" + (Model.UserRatings.Count > 0 ? "":" hidden"))">
             <div class="col-xs-2">
                 <strong>Rated:</strong>
             </div>
