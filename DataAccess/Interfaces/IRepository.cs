@@ -12,5 +12,6 @@ namespace DataAccess.Interfaces
         void Add(T item);
         void Update(T item);
         void Remove(T item);
+        IEnumerable<T> Filter(Func<T, bool> predicate);
     }
 }

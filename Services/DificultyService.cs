@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class RecipeService : Service<Recipe>, IRecipeService
+    public class DificultyService : Service<Dificulty>, IDificultyService
     {
-        public RecipeService(IRepository<Recipe> repository) : base(repository)
+        public DificultyService(IRepository<Dificulty> repository) : base(repository)
         {
         }
     }

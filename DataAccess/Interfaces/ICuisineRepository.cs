@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Interfaces
 {
-    public interface IRecipeCategoryRepository: IRepository<RecipeCategory>
+  public   interface ICuisineRepository: IRepository<Cuisine>
     {
-        IEnumerable<RecipeCategory> GetByRecipeId(int recipeId);
     }
 }

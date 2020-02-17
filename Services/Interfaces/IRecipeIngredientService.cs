@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Services.Interfaces
 {
-    public interface IRecipeService: IService<Recipe>
+    public interface IRecipeIngredientService : IService<RecipeIngredient>
     {
-        //add custom methods here
+        void DeleteByRecipe(int recipeId);
     }
 }

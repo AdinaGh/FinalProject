@@ -76,7 +76,7 @@ namespace Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", recipeCategory.CategoryId);
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "ImageUrl", recipeCategory.RecipeId);
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeCategory.RecipeId);
             return View(recipeCategory);
         }
 

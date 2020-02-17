@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Services.Interfaces
 {
-    public interface IRecipeService: IService<Recipe>
+    public interface IDificultyService : IService<Dificulty>
     {
-        //add custom methods here
     }
 }

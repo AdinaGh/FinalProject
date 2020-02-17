@@ -1,10 +1,12 @@
 using DataAccess;
 using DataAccess.Interfaces;
+using Entities.Models;
 using Services;
 using Services.Interfaces;
 using System;
 
 using Unity;
+using Unity.Lifetime;
 
 namespace Web
 {
@@ -46,10 +48,24 @@ namespace Web
 
             // TODO: Register your type's mappings here.
             container.RegisterType<ICategoryRepository, CategoryRepository>();
-            container.RegisterType<IRecipeCategoryRepository, RecipeCategoryRepository>();
             container.RegisterType<ICategoryService, CategoryService>();
             container.RegisterType<IRecipeRepository, RecipeRepository>();
             container.RegisterType<IRecipeService, RecipeService>();
+            container.RegisterType<ICuisineRepository, CuisineRepository>();
+            container.RegisterType<ICuisineService, CuisineService>();
+            container.RegisterType<IDificultyRepository, DificultyRepository>();
+            container.RegisterType<IDificultyService, DificultyService>();
+
+            //container.RegisterType<IRecipeOccasionRepository, RecipeOccasionRepository>();
+            container.RegisterType<IRecipeOccasionService, RecipeOccasionService>();
+            //container.RegisterType<IRecipeIngredientRepository, RecipeIngredientRepository>();
+            container.RegisterType<IRecipeIngredientService, RecipeIngredientService>();
+            container.RegisterType<IRecipeCategoryService, RecipeCategoryService>();
+
+
+            container.RegisterType(typeof(IRepository<>), typeof(Repository<>), new TransientLifetimeManager());
+            container.RegisterType(typeof(IService<>), typeof(Service<>), new TransientLifetimeManager());
+
         }
     }
 }

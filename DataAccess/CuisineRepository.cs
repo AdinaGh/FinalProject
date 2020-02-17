@@ -1,17 +1,16 @@
 ﻿using DataAccess.Interfaces;
 using Entities.Models;
-using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace DataAccess
 {
-    public class RecipeService : Service<Recipe>, IRecipeService
+    public class CuisineRepository : Repository<Cuisine>, ICuisineRepository
     {
-        public RecipeService(IRepository<Recipe> repository) : base(repository)
+        public CuisineRepository(RecipesDataContext context) : base(context)
         {
         }
     }

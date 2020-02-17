@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Services.Interfaces
 {
-    public interface ICategoryService: IService<Category>, IDisposable
+    public interface ICategoryService: IService<Category>
     {
     }
 }
