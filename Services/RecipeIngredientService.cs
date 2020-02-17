@@ -17,7 +17,7 @@ namespace Services
 
         public void DeleteByRecipe(int recipeId)
         {
-            var ingredients = Filter(rc => rc.RecipeId == recipeId);
+            var ingredients = Filter(rc => rc.RecipeId == recipeId).ToList();
             foreach(var ingredient in ingredients)
             {
                 Delete(ingredient.RecipeIngredientId);

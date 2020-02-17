@@ -17,7 +17,7 @@ namespace Services
 
         public void DeleteByRecipe(int recipeId)
         {
-            var categories = Filter(rc => rc.RecipeId == recipeId);
+            var categories = Filter(rc => rc.RecipeId == recipeId).ToList();
             foreach (var category in categories)
             {
                 Delete(category.RecipeCategoryId);

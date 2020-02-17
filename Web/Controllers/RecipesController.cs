@@ -17,16 +17,16 @@ namespace Web.Controllers
         private IRecipeService _recipeService;
         private IRecipeIngredientService _recipeIngredientService;
         private IRecipeCategoryService _recipeCategoryService;
-        private IRecipeIngredientService _recipeOccasionService;
+        private IRecipeOccasionService _recipeOccasionService;
         private ICuisineService _cuisineService;
         private IDificultyService _difficultyService;
 
         public RecipesController(IRecipeService recipeService,
-            ICuisineService cuisineService, 
+            ICuisineService cuisineService,
             IDificultyService difficultyService,
               IRecipeIngredientService recipeIngredientService,
         IRecipeCategoryService recipeCategoryService,
-        IRecipeIngredientService recipeOccasionService        
+        IRecipeOccasionService recipeOccasionService
             )
         {
             _recipeService = recipeService;
