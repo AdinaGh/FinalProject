@@ -1,4 +1,7 @@
 begin tran t1
+insert into users(name) values('John Doe')
+GO
+
 INSERT INTO [Category]([Name])
      VALUES('Dinner')
 INSERT INTO [Category]([Name])
