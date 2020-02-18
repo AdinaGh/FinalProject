@@ -64,24 +64,19 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateX(RecipeViewModel mmm)
+        public ActionResult AddReview(RecipeViewModel recipe)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.Comments.Add(comment);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
+            if (recipe?.AddComments != null)
+            {
                 db.Comments.Add(new Comment()
                 {
-                    RecipeId = mmm.RecipeId,
-                    UserId = mmm.CreatedUserId,
-                    Comment1 = mmm.AddComments
+                    RecipeId = recipe.RecipeId,
+                    UserId = recipe.CreatedUserId,
+                    Comment1 = recipe.AddComments
                 });
                 db.SaveChanges();
-                mmm.AddComments = "";
-                return RedirectToAction("Details", "Recipes", new { id = mmm.RecipeId });
+            }
+                return RedirectToAction("Details", "Recipes", new { id = recipe.RecipeId });
         }
 
         // GET: Comments/Edit/5

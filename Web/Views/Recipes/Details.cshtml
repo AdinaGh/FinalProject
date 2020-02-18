@@ -186,19 +186,20 @@
         <div class="well">
             <div class="row">
                 <h3>Customer Reviews</h3>
-                @foreach (var item in Model.Comments)
-                {
-                    <p>
+                <ul class="list-group">
+                    @foreach (var item in Model.Comments)
+                    {
+                    <li class="list-group-item">
                         @item.Description
-                    </p>
-                    <hr />
-                }
+                    </li>
+                    }
+                </ul>
             </div>
             <div class="row">
                 <h4>Add Review</h4>
             </div>
             @using (Html.BeginForm(
-                "CreateX", "Comments"))
+                "AddReview", "Comments"))
             {
                 @Html.AntiForgeryToken()
         <div class="row">
