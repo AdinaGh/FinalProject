@@ -184,13 +184,34 @@
     </div>
     <div role="tabpanel" class="tab-pane fade" id="review" aria-labelledby="profile-tab">
         <div class="well">
-            <h3>Customer Reviews</h3>
-            @foreach (var item in Model.Comments)
+            <div class="row">
+                <h3>Customer Reviews</h3>
+                @foreach (var item in Model.Comments)
+                {
+                    <p>
+                        @item.Description
+                    </p>
+                    <hr />
+                }
+            </div>
+            <div class="row">
+                <h4>Add Review</h4>
+            </div>
+            @using (Html.BeginForm(
+                "CreateX", "Comments"))
             {
-                <p>
-                    @item.Description
-                </p>
-                <hr />
+                @Html.AntiForgeryToken()
+        <div class="row">
+            @Html.LabelFor(model => model.AddComments, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.AddComments, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.RecipeId)
+            @Html.HiddenFor(model => model.CreatedUserId)
+        </div>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Send" class="btn btn-default" />
+                    </div>
+                </div>
             }
         </div>
 

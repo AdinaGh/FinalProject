@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Entities.Models;
+using Web.Models;
 
 namespace Web.Controllers
 {
@@ -59,6 +60,28 @@ namespace Web.Controllers
 
             ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", comment.RecipeId);
             return View(comment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateX(RecipeViewModel mmm)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //    db.Comments.Add(comment);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+                db.Comments.Add(new Comment()
+                {
+                    RecipeId = mmm.RecipeId,
+                    UserId = mmm.CreatedUserId,
+                    Comment1 = mmm.AddComments
+                });
+                db.SaveChanges();
+                mmm.AddComments = "";
+                return RedirectToAction("Details", "Recipes", new { id = mmm.RecipeId });
         }
 
         // GET: Comments/Edit/5

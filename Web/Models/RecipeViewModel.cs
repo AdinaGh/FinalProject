@@ -81,5 +81,8 @@ namespace Web.Models
                 }
             }
         }
+
+        [DisplayName("Tell me what you think")]
+        public string AddComments { get; set; } = "";
     }
 }
