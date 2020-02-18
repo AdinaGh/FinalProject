@@ -10,116 +10,112 @@ using Entities.Models;
 
 namespace Web.Controllers
 {
-    public class RecipeCategoriesController : Controller
+    public class UserRatingsController : Controller
     {
         private RecipesDataContext db = new RecipesDataContext();
 
-        // GET: RecipeCategories
+        // GET: UserRatings
         public ActionResult Index()
         {
-            var recipeCategories = db.RecipeCategories.Include(r => r.Category).Include(r => r.Recipe);
-            return View(recipeCategories.ToList());
+            var userRatings = db.UserRatings.Include(u => u.Recipe);
+            return View(userRatings.ToList());
         }
 
-        // GET: RecipeCategories/Details/5
+        // GET: UserRatings/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            if (recipeCategory == null)
+            UserRating userRating = db.UserRatings.Find(id);
+            if (userRating == null)
             {
                 return HttpNotFound();
             }
-            return View(recipeCategory);
+            return View(userRating);
         }
 
-        // GET: RecipeCategories/Create
+        // GET: UserRatings/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title");
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Notes");
             return View();
         }
 
-        // POST: RecipeCategories/Create
+        // POST: UserRatings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RecipeCategoryId,RecipeId,CategoryId")] RecipeCategory recipeCategory)
+        public ActionResult Create([Bind(Include = "UserRatingId,RecipeId,UserId,Rating")] UserRating userRating)
         {
             if (ModelState.IsValid)
             {
-                db.RecipeCategories.Add(recipeCategory);
+                db.UserRatings.Add(userRating);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", recipeCategory.CategoryId);
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeCategory.RecipeId);
-            return View(recipeCategory);
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Notes", userRating.RecipeId);
+            return View(userRating);
         }
 
-        // GET: RecipeCategories/Edit/5
+        // GET: UserRatings/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            if (recipeCategory == null)
+            UserRating userRating = db.UserRatings.Find(id);
+            if (userRating == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", recipeCategory.CategoryId);
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeCategory.RecipeId);
-            return View(recipeCategory);
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Notes", userRating.RecipeId);
+            return View(userRating);
         }
 
-        // POST: RecipeCategories/Edit/5
+        // POST: UserRatings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecipeCategoryId,RecipeId,CategoryId")] RecipeCategory recipeCategory)
+        public ActionResult Edit([Bind(Include = "UserRatingId,RecipeId,UserId,Rating")] UserRating userRating)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recipeCategory).State = EntityState.Modified;
+                db.Entry(userRating).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", recipeCategory.CategoryId);
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeCategory.RecipeId);
-            return View(recipeCategory);
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Notes", userRating.RecipeId);
+            return View(userRating);
         }
 
-        // GET: RecipeCategories/Delete/5
+        // GET: UserRatings/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            if (recipeCategory == null)
+            UserRating userRating = db.UserRatings.Find(id);
+            if (userRating == null)
             {
                 return HttpNotFound();
             }
-            return View(recipeCategory);
+            return View(userRating);
         }
 
-        // POST: RecipeCategories/Delete/5
+        // POST: UserRatings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            db.RecipeCategories.Remove(recipeCategory);
+            UserRating userRating = db.UserRatings.Find(id);
+            db.UserRatings.Remove(userRating);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

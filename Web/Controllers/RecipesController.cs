@@ -11,7 +11,7 @@ using Services.Interfaces;
 using Web.Models;
 
 namespace Web.Controllers
-{
+{    
     public class RecipesController : Controller
     {
         private readonly IRecipeService _recipeService;
@@ -149,7 +149,7 @@ namespace Web.Controllers
 
             return View(recipe);
         }
-                
+
         // GET: Recipes/Delete/5
         public ActionResult Delete(int? id)
         {

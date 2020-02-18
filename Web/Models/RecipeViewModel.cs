@@ -28,6 +28,7 @@ namespace Web.Models
         public Nullable<int> Serves { get; set; }
         public string ImageUrl { get; set; }
         [Required]
+        [DisplayName("Recipe Name")]
         public string Title { get; set; }
 
         public ICollection<CommentModel> Comments { get; set; }

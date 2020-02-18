@@ -155,9 +155,17 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\CuisinesController.cs" />
+    <Compile Include="Controllers\DificultiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OccasionsController.cs" />
     <Compile Include="Controllers\RecipeCategoriesController.cs" />
+    <Compile Include="Controllers\RecipeIngredientsController.cs" />
+    <Compile Include="Controllers\RecipeOccasionsController.cs" />
     <Compile Include="Controllers\RecipesController.cs" />
+    <Compile Include="Controllers\RecipeStepsController.cs" />
+    <Compile Include="Controllers\UserRatingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,6 +242,46 @@
     <Content Include="Views\Recipes\Details.cshtml" />
     <Content Include="Views\Recipes\Edit.cshtml" />
     <Content Include="Views\Recipes\Index.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Comments\Details.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\RecipeSteps\Create.cshtml" />
+    <Content Include="Views\RecipeSteps\Delete.cshtml" />
+    <Content Include="Views\RecipeSteps\Details.cshtml" />
+    <Content Include="Views\RecipeSteps\Edit.cshtml" />
+    <Content Include="Views\RecipeSteps\Index.cshtml" />
+    <Content Include="Views\UserRatings\Create.cshtml" />
+    <Content Include="Views\UserRatings\Delete.cshtml" />
+    <Content Include="Views\UserRatings\Details.cshtml" />
+    <Content Include="Views\UserRatings\Edit.cshtml" />
+    <Content Include="Views\UserRatings\Index.cshtml" />
+    <Content Include="Views\RecipeIngredients\Create.cshtml" />
+    <Content Include="Views\RecipeIngredients\Delete.cshtml" />
+    <Content Include="Views\RecipeIngredients\Details.cshtml" />
+    <Content Include="Views\RecipeIngredients\Edit.cshtml" />
+    <Content Include="Views\RecipeIngredients\Index.cshtml" />
+    <Content Include="Views\RecipeOccasions\Create.cshtml" />
+    <Content Include="Views\RecipeOccasions\Delete.cshtml" />
+    <Content Include="Views\RecipeOccasions\Details.cshtml" />
+    <Content Include="Views\RecipeOccasions\Edit.cshtml" />
+    <Content Include="Views\RecipeOccasions\Index.cshtml" />
+    <Content Include="Views\Occasions\Create.cshtml" />
+    <Content Include="Views\Occasions\Delete.cshtml" />
+    <Content Include="Views\Occasions\Details.cshtml" />
+    <Content Include="Views\Occasions\Edit.cshtml" />
+    <Content Include="Views\Occasions\Index.cshtml" />
+    <Content Include="Views\Cuisines\Create.cshtml" />
+    <Content Include="Views\Cuisines\Delete.cshtml" />
+    <Content Include="Views\Cuisines\Details.cshtml" />
+    <Content Include="Views\Cuisines\Edit.cshtml" />
+    <Content Include="Views\Cuisines\Index.cshtml" />
+    <Content Include="Views\Dificulties\Create.cshtml" />
+    <Content Include="Views\Dificulties\Delete.cshtml" />
+    <Content Include="Views\Dificulties\Details.cshtml" />
+    <Content Include="Views\Dificulties\Edit.cshtml" />
+    <Content Include="Views\Dificulties\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

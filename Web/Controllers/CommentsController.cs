@@ -10,116 +10,112 @@ using Entities.Models;
 
 namespace Web.Controllers
 {
-    public class RecipeCategoriesController : Controller
+    public class CommentsController : Controller
     {
         private RecipesDataContext db = new RecipesDataContext();
 
-        // GET: RecipeCategories
+        // GET: Comments
         public ActionResult Index()
         {
-            var recipeCategories = db.RecipeCategories.Include(r => r.Category).Include(r => r.Recipe);
-            return View(recipeCategories.ToList());
+            var comments = db.Comments.Include(c => c.Recipe);
+            return View(comments.ToList());
         }
 
-        // GET: RecipeCategories/Details/5
+        // GET: Comments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            if (recipeCategory == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(recipeCategory);
+            return View(comment);
         }
 
-        // GET: RecipeCategories/Create
+        // GET: Comments/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
             ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title");
             return View();
         }
 
-        // POST: RecipeCategories/Create
+        // POST: Comments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RecipeCategoryId,RecipeId,CategoryId")] RecipeCategory recipeCategory)
+        public ActionResult Create([Bind(Include = "CommentId,Comment1,RecipeId,UserId")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.RecipeCategories.Add(recipeCategory);
+                db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", recipeCategory.CategoryId);
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeCategory.RecipeId);
-            return View(recipeCategory);
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", comment.RecipeId);
+            return View(comment);
         }
 
-        // GET: RecipeCategories/Edit/5
+        // GET: Comments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            if (recipeCategory == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", recipeCategory.CategoryId);
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeCategory.RecipeId);
-            return View(recipeCategory);
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", comment.RecipeId);
+            return View(comment);
         }
 
-        // POST: RecipeCategories/Edit/5
+        // POST: Comments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecipeCategoryId,RecipeId,CategoryId")] RecipeCategory recipeCategory)
+        public ActionResult Edit([Bind(Include = "CommentId,Comment1,RecipeId,UserId")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recipeCategory).State = EntityState.Modified;
+                db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", recipeCategory.CategoryId);
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeCategory.RecipeId);
-            return View(recipeCategory);
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", comment.RecipeId);
+            return View(comment);
         }
 
-        // GET: RecipeCategories/Delete/5
+        // GET: Comments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            if (recipeCategory == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(recipeCategory);
+            return View(comment);
         }
 
-        // POST: RecipeCategories/Delete/5
+        // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            db.RecipeCategories.Remove(recipeCategory);
+            Comment comment = db.Comments.Find(id);
+            db.Comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

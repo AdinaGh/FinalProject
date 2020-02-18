@@ -10,116 +10,107 @@ using Entities.Models;
 
 namespace Web.Controllers
 {
-    public class RecipeCategoriesController : Controller
+    public class OccasionsController : Controller
     {
         private RecipesDataContext db = new RecipesDataContext();
 
-        // GET: RecipeCategories
+        // GET: Occasions
         public ActionResult Index()
         {
-            var recipeCategories = db.RecipeCategories.Include(r => r.Category).Include(r => r.Recipe);
-            return View(recipeCategories.ToList());
+            return View(db.Occasions.ToList());
         }
 
-        // GET: RecipeCategories/Details/5
+        // GET: Occasions/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            if (recipeCategory == null)
+            Occasion occasion = db.Occasions.Find(id);
+            if (occasion == null)
             {
                 return HttpNotFound();
             }
-            return View(recipeCategory);
+            return View(occasion);
         }
 
-        // GET: RecipeCategories/Create
+        // GET: Occasions/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title");
             return View();
         }
 
-        // POST: RecipeCategories/Create
+        // POST: Occasions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RecipeCategoryId,RecipeId,CategoryId")] RecipeCategory recipeCategory)
+        public ActionResult Create([Bind(Include = "OccasionId,Name")] Occasion occasion)
         {
             if (ModelState.IsValid)
             {
-                db.RecipeCategories.Add(recipeCategory);
+                db.Occasions.Add(occasion);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", recipeCategory.CategoryId);
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeCategory.RecipeId);
-            return View(recipeCategory);
+            return View(occasion);
         }
 
-        // GET: RecipeCategories/Edit/5
+        // GET: Occasions/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            if (recipeCategory == null)
+            Occasion occasion = db.Occasions.Find(id);
+            if (occasion == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", recipeCategory.CategoryId);
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeCategory.RecipeId);
-            return View(recipeCategory);
+            return View(occasion);
         }
 
-        // POST: RecipeCategories/Edit/5
+        // POST: Occasions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecipeCategoryId,RecipeId,CategoryId")] RecipeCategory recipeCategory)
+        public ActionResult Edit([Bind(Include = "OccasionId,Name")] Occasion occasion)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recipeCategory).State = EntityState.Modified;
+                db.Entry(occasion).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", recipeCategory.CategoryId);
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeCategory.RecipeId);
-            return View(recipeCategory);
+            return View(occasion);
         }
 
-        // GET: RecipeCategories/Delete/5
+        // GET: Occasions/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            if (recipeCategory == null)
+            Occasion occasion = db.Occasions.Find(id);
+            if (occasion == null)
             {
                 return HttpNotFound();
             }
-            return View(recipeCategory);
+            return View(occasion);
         }
 
-        // POST: RecipeCategories/Delete/5
+        // POST: Occasions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RecipeCategory recipeCategory = db.RecipeCategories.Find(id);
-            db.RecipeCategories.Remove(recipeCategory);
+            Occasion occasion = db.Occasions.Find(id);
+            db.Occasions.Remove(occasion);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

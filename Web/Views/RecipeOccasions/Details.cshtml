@@ -1,0 +1,34 @@
+﻿@model Entities.Models.RecipeOccasion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RecipeOccasion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Occasion.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Occasion.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Recipe.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Recipe.Notes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RecipeOccasionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
