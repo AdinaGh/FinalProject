@@ -194,6 +194,7 @@
     <Content Include="StaticFiles\Images\cookbook.svg" />
     <Content Include="StaticFiles\Images\logo1.png" />
     <Content Include="StaticFiles\Scripts\recipe.js" />
+    <Content Include="UploadedFiles\Recipes\2.jpg" />
     <Content Include="UploadedFiles\Recipes\100.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

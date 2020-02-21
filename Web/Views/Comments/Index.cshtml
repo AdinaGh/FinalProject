@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.UserId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Recipe.Notes)
+            @Html.DisplayNameFor(model => model.Recipe.Title)
         </th>
         <th></th>
     </tr>
@@ -32,7 +32,7 @@
             @Html.DisplayFor(modelItem => item.UserId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Recipe.Notes)
+            @Html.DisplayFor(modelItem => item.Recipe.Title)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CommentId }) |

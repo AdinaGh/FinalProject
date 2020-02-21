@@ -13,3 +13,5 @@ packages
 /Web/obj/Debug
 /Web/bin
 /Entities/Entities.csproj.user
+/Services.Tests/bin/Debug
+/Services.Tests/obj/Debug
