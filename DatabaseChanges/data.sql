@@ -1,4 +1,3 @@
-begin tran t1
 insert into users(name) values('John Doe')
 GO
 
@@ -47,5 +46,3 @@ INSERT INTO [Occasion]([Name])
      VALUES('Wedding')
 
 
-commit tran t1  
---rollback tran t1
