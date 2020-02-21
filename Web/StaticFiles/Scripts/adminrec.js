@@ -7,7 +7,7 @@
     if (url.endsWith('Edit')) {
     }
     else {
-   url =     $(ahref).attr('href').substr(0, $(ahref).attr('href').lastIndexOf('/'))
+        url = $(ahref).attr('href').substr(0, $(ahref).attr('href').lastIndexOf('/'))
     }
     url = url + '/' + id;
 

@@ -31,6 +31,17 @@ namespace Web.Models
         [DisplayName("Recipe Name")]
         public string Title { get; set; }
 
+        public string TitleTrim
+        {
+            get
+            {
+                if (Title != null && Title.Length > 25)
+                {
+                    return Title.Substring(0, 24) + "..";
+                }
+                return Title;
+            }
+        }
         public ICollection<CommentModel> Comments { get; set; }
         public CuisineModel Cuisine { get; set; }
         public DificultyModel Dificulty { get; set; }

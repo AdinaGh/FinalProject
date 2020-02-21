@@ -68,7 +68,6 @@ div.recipe-box {
     margin-bottom: 20px;
 }
 
-
 img.recipe-full-img{
     max-height:500px;
 }
@@ -92,4 +91,10 @@ div.tab-recipes hr{
 
 .recipe-details-cat div span.label.label-default {
     margin-right: 10px;
+}
+
+.tab-recipes #review ul.rec-rev li{
+    background-color: transparent;
+    border: none;
+    list-style-type: decimal;
 }
