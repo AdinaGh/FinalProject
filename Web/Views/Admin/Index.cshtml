@@ -2,18 +2,24 @@
     ViewBag.Title = "Admin";
 }
 
+@section Scripts
+{
+    <script src="@Url.Content("~/StaticFiles/Scripts/adminrec.js")"></script>
+}
 
-    <div>
-        <h3>Administration Area</h3>
-        @Html.ActionLink("Categories", "Index", "Categories")<br />
-        @Html.ActionLink("Dificulties", "Index", "Dificulties")<br />
-        @Html.ActionLink("Cuisines", "Index", "Cuisines")<br />
-        @Html.ActionLink("Occasions", "Index", "Occasions")<br />
-        @Html.ActionLink("RecipeSteps", "Index", "RecipeSteps")<br />
-        @Html.ActionLink("RecipeCategories", "Index", "RecipeCategories")<br />
-        @Html.ActionLink("RecipeIngredients", "Index", "RecipeIngredients")<br />
-        @Html.ActionLink("RecipeOccasions", "Index", "RecipeOccasions")<br />
-        @Html.ActionLink("UserRatings", "Index", "UserRatings")<br />
-        @Html.ActionLink("Comments", "Index", "Comments")<br />
-    </div>
+<div>
+    <h3>Administration Area</h3>
+    @Html.ActionLink("Add Recipe", "Create", "Recipes")<br />
+    <a href="@Url.Action("Edit", "Recipes")" onclick="return gotoEdit(this);">Edit Recipe</a> <input type="number" id="rec-id" value="1" /><br />
+    @Html.ActionLink("Categories", "Index", "Categories")<br />
+    @Html.ActionLink("Dificulties", "Index", "Dificulties")<br />
+    @Html.ActionLink("Cuisines", "Index", "Cuisines")<br />
+    @Html.ActionLink("Occasions", "Index", "Occasions")<br />
+    @Html.ActionLink("RecipeSteps", "Index", "RecipeSteps")<br />
+    @Html.ActionLink("RecipeCategories", "Index", "RecipeCategories")<br />
+    @Html.ActionLink("RecipeIngredients", "Index", "RecipeIngredients")<br />
+    @Html.ActionLink("RecipeOccasions", "Index", "RecipeOccasions")<br />
+    @Html.ActionLink("UserRatings", "Index", "UserRatings")<br />
+    @Html.ActionLink("Comments", "Index", "Comments")<br />
+</div>
 
