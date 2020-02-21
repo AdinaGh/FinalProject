@@ -235,7 +235,6 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
-    <Content Include="Views\Home\Old.cshtml" />
     <Content Include="Views\RecipeCategories\Create.cshtml" />
     <Content Include="Views\RecipeCategories\Delete.cshtml" />
     <Content Include="Views\RecipeCategories\Details.cshtml" />
