@@ -39,7 +39,7 @@ namespace Web.Controllers
         // GET: RecipeSteps/Create
         public ActionResult Create()
         {
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Notes");
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Notes", recipeStep.RecipeId);
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeStep.RecipeId);
             return View(recipeStep);
         }
 
@@ -73,7 +73,7 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Notes", recipeStep.RecipeId);
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeStep.RecipeId);
             return View(recipeStep);
         }
 
@@ -90,7 +90,7 @@ namespace Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Notes", recipeStep.RecipeId);
+            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", recipeStep.RecipeId);
             return View(recipeStep);
         }
 

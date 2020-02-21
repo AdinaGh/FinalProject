@@ -7,28 +7,28 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>   
+<body>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-                <div class="row">
-                    <div class="col-sm-10">
-                        <a href="@Url.Action("Index", "Recipes", null)">
-                            <img class="logo" src="~/StaticFiles/Images/cookbook.svg" alt="" />
-                            </a>
-                    </div>
-                    <div class="col-xs-6 col-sm-8 hide-small top-menu">
-                        <ul class="">
-                            <li>
-                                    <a href="http://www.facebook.com">
-                                        <img src="~/StaticFiles/Images/fb2.png" alt="" width="24" height="24" />
-                                    </a>
-                            </li>
-                            <li>
-                                <a href="https://asp.net" class="btn btn-primary btn-sm">Login</a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <a href="@Url.Action("Index", "Recipes", null)">
+                        <img class="logo" src="~/StaticFiles/Images/cookbook.svg" alt="" />
+                    </a>
                 </div>
+                <div class="col-xs-6 col-sm-8 hide-small top-menu">
+                    <ul class="">
+                        <li>
+                            <a href="http://www.facebook.com">
+                                <img src="~/StaticFiles/Images/fb2.png" alt="" width="24" height="24" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://asp.net" class="btn btn-primary btn-sm">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="container">
             <div class="navbar-header">
@@ -45,6 +45,7 @@
                     <li>@Html.ActionLink("Recipes", "Index", "Recipes")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
                 </ul>
             </div>
         </div>
@@ -53,7 +54,16 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Adina Recipe Book</p>
+            <div class="container">
+                <p class="text-muted">
+                    @Html.ActionLink("Home", "Index", "Recipes") |
+                    @Html.ActionLink("Recipes", "Index", "Recipes") |
+                    @Html.ActionLink("About", "About", "Home") |
+                    @Html.ActionLink("Contact", "Contact", "Home") |
+                    @Html.ActionLink("Admin", "Index", "Admin")<br />
+                    &copy; @DateTime.Now.Year - Adina Recipe Book
+                </p>
+            </div>
         </footer>
     </div>
 
