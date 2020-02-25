@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Entities.Models;
 using Services.Interfaces;
 using Web.Models;
@@ -111,6 +112,7 @@ namespace Web.Controllers
         }
 
         // GET: Recipes/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -135,6 +137,7 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(
             RecipeViewModel recipe)
         {
@@ -151,6 +154,7 @@ namespace Web.Controllers
         }
 
         // GET: Recipes/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -168,6 +172,7 @@ namespace Web.Controllers
         // POST: Recipes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             _recipeIngredientService.DeleteByRecipe(id);

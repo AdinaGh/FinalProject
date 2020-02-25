@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseChanges", "DatabaseChanges", "{CFEE2ECD-DADD-40AA-8B76-0948D0DCE50D}"
 	ProjectSection(SolutionItems) = preProject
-		DatabaseChanges\data.sql = DatabaseChanges\data.sql
-		DatabaseChanges\dbStructure.sql = DatabaseChanges\dbStructure.sql
-		DatabaseChanges\design.jpg = DatabaseChanges\design.jpg
+		C:\Users\adina\Downloads\x\x\DatabaseChanges\data.sql = C:\Users\adina\Downloads\x\x\DatabaseChanges\data.sql
+		C:\Users\adina\Downloads\x\x\DatabaseChanges\dbStructure.sql = C:\Users\adina\Downloads\x\x\DatabaseChanges\dbStructure.sql
+		C:\Users\adina\Downloads\x\x\DatabaseChanges\design.jpg = C:\Users\adina\Downloads\x\x\DatabaseChanges\design.jpg
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{F56A20C8-D009-4454-9AF3-4C4DCB56752B}"

@@ -4,9 +4,13 @@ using Entities.Models;
 using Services;
 using Services.Interfaces;
 using System;
-
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Unity;
+using Unity.Injection;
 using Unity.Lifetime;
+using Web.Controllers;
+using Web.Models;
 
 namespace Web
 {
@@ -62,6 +66,11 @@ namespace Web
             container.RegisterType<IUserRatingService, UserRatingService>();
             container.RegisterType<IRecipeStepService, RecipeStepService>();
             container.RegisterType<ICommentService, CommentService>();
+
+            container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
+            container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<ManageController>(new InjectionConstructor());
 
 
             container.RegisterType(typeof(IRepository<>), typeof(Repository<>), new TransientLifetimeManager());

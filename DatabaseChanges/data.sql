@@ -1,3 +1,6 @@
+insert into [AspNetRoles] values(1,'Admin')
+insert into [AspNetRoles] values(2,'RegisteredUser')
+GO
 insert into users(name) values('John Doe')
 GO
 
