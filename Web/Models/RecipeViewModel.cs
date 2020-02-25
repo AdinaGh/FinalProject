@@ -60,7 +60,13 @@ namespace Web.Models
             }
         }
         [Range(1, int.MaxValue)]
-        public int CreatedUserId { get; set; }
+        public int CreatedUserId { 
+            get
+            {
+                return 1;
+            }
+
+        }
         public int CuisineId { get; set; }
         public int DificultyId { get; set; }
 

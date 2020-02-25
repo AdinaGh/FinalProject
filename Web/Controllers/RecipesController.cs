@@ -80,6 +80,7 @@ namespace Web.Controllers
         }
 
         // GET: Recipes/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.CuisineId = new SelectList(_cuisineService.GetAll(), "CuisineId", "Name");
@@ -93,6 +94,7 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create(
         RecipeViewModel recipe)
         {
@@ -211,7 +213,7 @@ namespace Web.Controllers
                 RecipeId = recipe.RecipeId,
                 CuisineId = recipe.CuisineId,
                 DificultyId = recipe.DificultyId,
-                CreatedUserId = recipe.CreatedUserId,
+                //CreatedUserId = recipe.CreatedUserId,
                 CreatedDate = recipe.CreatedDate,
                 ImageUrl = recipe.ImageUrl,
                 Title = recipe.Title,

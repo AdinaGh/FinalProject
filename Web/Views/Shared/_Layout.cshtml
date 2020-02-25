@@ -33,11 +33,15 @@
                     <li>@Html.ActionLink("Recipes", "Index", "Recipes")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Add Recipe", "Create", "Recipes")</li>
+                    }
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
                     }
-                </ul>
+                    </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
