@@ -20,5 +20,6 @@ namespace Entities.Models
         public byte Rating { get; set; }
     
         public virtual Recipe Recipe { get; set; }
+        public virtual User User { get; set; }
     }
 }

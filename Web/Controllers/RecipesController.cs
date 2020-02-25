@@ -96,6 +96,7 @@ namespace Web.Controllers
         public ActionResult Create(
         RecipeViewModel recipe)
         {
+             //User.Identity.Name;
             if (ModelState.IsValid)
             {
                 var recipeMap = MapViewToEntity(recipe);

@@ -11,6 +11,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CommentsController : Controller
     {
         private RecipesDataContext db = new RecipesDataContext();

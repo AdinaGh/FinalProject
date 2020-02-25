@@ -18,7 +18,9 @@ namespace Entities.Models
         public string Comment1 { get; set; }
         public int RecipeId { get; set; }
         public int UserId { get; set; }
+        public System.DateTime CreatedDate { get; set; }
     
         public virtual Recipe Recipe { get; set; }
+        public virtual User User { get; set; }
     }
 }

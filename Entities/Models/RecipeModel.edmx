@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RecipesDataContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RecipesDataContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -20,6 +20,7 @@
           <Property Name="Comment" Type="text" Nullable="false" />
           <Property Name="RecipeId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Cuisine">
           <Key>
@@ -100,6 +101,14 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Rating" Type="tinyint" Nullable="false" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Comment_Recipe">
           <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
@@ -109,6 +118,18 @@
             </Principal>
             <Dependent Role="Comment">
               <PropertyRef Name="RecipeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -133,6 +154,18 @@
             </Principal>
             <Dependent Role="Recipe">
               <PropertyRef Name="DificultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="CreatedUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -220,6 +253,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserRating_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserRating" Type="Self.UserRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RecipesDataContextStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
@@ -232,8 +277,13 @@
           <EntitySet Name="RecipeOccasion" EntityType="Self.RecipeOccasion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecipeStep" EntityType="Self.RecipeStep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRating" EntityType="Self.UserRating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Comment_Recipe" Association="Self.FK_Comment_Recipe">
             <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Users" Association="Self.FK_Comment_Users">
+            <End Role="Users" EntitySet="Users" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
           <AssociationSet Name="FK_Recipe_Cuisine" Association="Self.FK_Recipe_Cuisine">
@@ -242,6 +292,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Recipe_Dificulty" Association="Self.FK_Recipe_Dificulty">
             <End Role="Dificulty" EntitySet="Dificulty" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Users" Association="Self.FK_Recipe_Users">
+            <End Role="Users" EntitySet="Users" />
             <End Role="Recipe" EntitySet="Recipe" />
           </AssociationSet>
           <AssociationSet Name="FK_RecipeCategory_Category" Association="Self.FK_RecipeCategory_Category">
@@ -272,12 +326,15 @@
             <End Role="Recipe" EntitySet="Recipe" />
             <End Role="UserRating" EntitySet="UserRating" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserRating_Users" Association="Self.FK_UserRating_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRating" EntitySet="UserRating" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="RecipesDataContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -295,6 +352,8 @@
           <Property Name="RecipeId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Recipe" Relationship="Self.FK_Comment_Recipe" FromRole="Comment" ToRole="Recipe" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_Comment_Users" FromRole="Comment" ToRole="User" />
         </EntityType>
         <EntityType Name="Cuisine">
           <Key>
@@ -343,6 +402,7 @@
           <NavigationProperty Name="RecipeOccasions" Relationship="Self.FK_RecipeOccasion_Recipe" FromRole="Recipe" ToRole="RecipeOccasion" />
           <NavigationProperty Name="RecipeSteps" Relationship="Self.FK_RecipeStep_Recipe" FromRole="Recipe" ToRole="RecipeStep" />
           <NavigationProperty Name="UserRatings" Relationship="Self.FK_UserRating_Recipe" FromRole="Recipe" ToRole="UserRating" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_Recipe_Users" FromRole="Recipe" ToRole="User" />
         </EntityType>
         <EntityType Name="RecipeCategory">
           <Key>
@@ -392,6 +452,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Rating" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Recipe" Relationship="Self.FK_UserRating_Recipe" FromRole="UserRating" ToRole="Recipe" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_UserRating_Users" FromRole="UserRating" ToRole="User" />
         </EntityType>
         <Association Name="FK_RecipeCategory_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -513,7 +574,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="RecipesDataContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Cuisines" EntityType="Self.Cuisine" />
@@ -565,15 +626,75 @@
             <End Role="Recipe" EntitySet="Recipes" />
             <End Role="UserRating" EntitySet="UserRatings" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="Entities.User" />
+          <AssociationSet Name="FK_Comment_Users" Association="Entities.FK_Comment_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Users" Association="Entities.FK_Recipe_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Recipe" EntitySet="Recipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRating_Users" Association="Entities.FK_UserRating_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserRating" EntitySet="UserRatings" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comments" Relationship="Entities.FK_Comment_Users" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="Recipes" Relationship="Entities.FK_Recipe_Users" FromRole="User" ToRole="Recipe" />
+          <NavigationProperty Name="UserRatings" Relationship="Entities.FK_UserRating_Users" FromRole="User" ToRole="UserRating" />
+        </EntityType>
+        <Association Name="FK_Comment_Users">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Users">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRating_Users">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.UserRating" Role="UserRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="RecipesDataContextStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="RecipesDataContextStoreContainer" CdmEntityContainer="RecipesDataContext">
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="RecipesDataContext.Category">
+            <EntityTypeMapping TypeName="Entities.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -581,8 +702,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="RecipesDataContext.Comment">
+            <EntityTypeMapping TypeName="Entities.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CommentId" ColumnName="CommentId" />
                 <ScalarProperty Name="Comment1" ColumnName="Comment" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
@@ -591,7 +713,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cuisines">
-            <EntityTypeMapping TypeName="RecipesDataContext.Cuisine">
+            <EntityTypeMapping TypeName="Entities.Cuisine">
               <MappingFragment StoreEntitySet="Cuisine">
                 <ScalarProperty Name="CuisineId" ColumnName="CuisineId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -599,7 +721,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Dificulties">
-            <EntityTypeMapping TypeName="RecipesDataContext.Dificulty">
+            <EntityTypeMapping TypeName="Entities.Dificulty">
               <MappingFragment StoreEntitySet="Dificulty">
                 <ScalarProperty Name="DificultyId" ColumnName="DificultyId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -607,7 +729,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Occasions">
-            <EntityTypeMapping TypeName="RecipesDataContext.Occasion">
+            <EntityTypeMapping TypeName="Entities.Occasion">
               <MappingFragment StoreEntitySet="Occasion">
                 <ScalarProperty Name="OccasionId" ColumnName="OccasionId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -615,7 +737,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Recipes">
-            <EntityTypeMapping TypeName="RecipesDataContext.Recipe">
+            <EntityTypeMapping TypeName="Entities.Recipe">
               <MappingFragment StoreEntitySet="Recipe">
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
                 <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
@@ -632,7 +754,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecipeCategories">
-            <EntityTypeMapping TypeName="RecipesDataContext.RecipeCategory">
+            <EntityTypeMapping TypeName="Entities.RecipeCategory">
               <MappingFragment StoreEntitySet="RecipeCategory">
                 <ScalarProperty Name="RecipeCategoryId" ColumnName="RecipeCategoryId" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
@@ -641,7 +763,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecipeIngredients">
-            <EntityTypeMapping TypeName="RecipesDataContext.RecipeIngredient">
+            <EntityTypeMapping TypeName="Entities.RecipeIngredient">
               <MappingFragment StoreEntitySet="RecipeIngredient">
                 <ScalarProperty Name="RecipeIngredientId" ColumnName="RecipeIngredientId" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
@@ -650,7 +772,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecipeOccasions">
-            <EntityTypeMapping TypeName="RecipesDataContext.RecipeOccasion">
+            <EntityTypeMapping TypeName="Entities.RecipeOccasion">
               <MappingFragment StoreEntitySet="RecipeOccasion">
                 <ScalarProperty Name="RecipeOccasionId" ColumnName="RecipeOccasionId" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
@@ -659,7 +781,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecipeSteps">
-            <EntityTypeMapping TypeName="RecipesDataContext.RecipeStep">
+            <EntityTypeMapping TypeName="Entities.RecipeStep">
               <MappingFragment StoreEntitySet="RecipeStep">
                 <ScalarProperty Name="RecipeStepId" ColumnName="RecipeStepId" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
@@ -669,12 +791,21 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRatings">
-            <EntityTypeMapping TypeName="RecipesDataContext.UserRating">
+            <EntityTypeMapping TypeName="Entities.UserRating">
               <MappingFragment StoreEntitySet="UserRating">
                 <ScalarProperty Name="UserRatingId" ColumnName="UserRatingId" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Entities.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

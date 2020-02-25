@@ -5,27 +5,31 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bdf698ac96b74ed594266bc89bb65a89" Name="Diagram1">
-        <EntityTypeShape EntityType="RecipesDataContext.Category" Width="1.5" PointX="6" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RecipesDataContext.Comment" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RecipesDataContext.Cuisine" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RecipesDataContext.Dificulty" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RecipesDataContext.Occasion" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RecipesDataContext.Recipe" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="RecipesDataContext.RecipeCategory" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RecipesDataContext.RecipeIngredient" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RecipesDataContext.RecipeOccasion" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RecipesDataContext.RecipeStep" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="RecipesDataContext.UserRating" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
-        <AssociationConnector Association="RecipesDataContext.FK_RecipeCategory_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="RecipesDataContext.FK_Comment_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="RecipesDataContext.FK_Recipe_Cuisine" ManuallyRouted="false" />
-        <AssociationConnector Association="RecipesDataContext.FK_Recipe_Dificulty" ManuallyRouted="false" />
-        <AssociationConnector Association="RecipesDataContext.FK_RecipeOccasion_Occasion" ManuallyRouted="false" />
-        <AssociationConnector Association="RecipesDataContext.FK_RecipeCategory_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="RecipesDataContext.FK_RecipeIngredient_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="RecipesDataContext.FK_RecipeOccasion_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="RecipesDataContext.FK_RecipeStep_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="RecipesDataContext.FK_UserRating_Recipe" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Entities.Category" Width="1.5" PointX="6" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Comment" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Cuisine" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Dificulty" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Occasion" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Recipe" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.RecipeCategory" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.RecipeIngredient" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.RecipeOccasion" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.RecipeStep" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.UserRating" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
+        <AssociationConnector Association="Entities.FK_RecipeCategory_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_Comment_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_Recipe_Cuisine" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_Recipe_Dificulty" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_RecipeOccasion_Occasion" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_RecipeCategory_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_RecipeIngredient_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_RecipeOccasion_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_RecipeStep_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_UserRating_Recipe" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Entities.User" Width="1.5" PointX="0.75" PointY="11" />
+        <AssociationConnector Association="Entities.FK_Comment_Users" />
+        <AssociationConnector Association="Entities.FK_Recipe_Users" />
+        <AssociationConnector Association="Entities.FK_UserRating_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

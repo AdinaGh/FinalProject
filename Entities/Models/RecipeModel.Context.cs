@@ -36,5 +36,6 @@ namespace Entities.Models
         public virtual DbSet<RecipeOccasion> RecipeOccasions { get; set; }
         public virtual DbSet<RecipeStep> RecipeSteps { get; set; }
         public virtual DbSet<UserRating> UserRatings { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

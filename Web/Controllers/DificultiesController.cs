@@ -10,6 +10,7 @@ using Entities.Models;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DificultiesController : Controller
     {
         private RecipesDataContext db = new RecipesDataContext();

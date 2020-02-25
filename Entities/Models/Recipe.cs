@@ -11,8 +11,7 @@ namespace Entities.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class Recipe
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -36,7 +35,6 @@ namespace Entities.Models
         public Nullable<int> TotalMinutes { get; set; }
         public Nullable<int> Serves { get; set; }
         public string ImageUrl { get; set; }
-        [DisplayName("Recipe Name")]
         public string Title { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -53,5 +51,6 @@ namespace Entities.Models
         public virtual ICollection<RecipeStep> RecipeSteps { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRating> UserRatings { get; set; }
+        public virtual User User { get; set; }
     }
 }

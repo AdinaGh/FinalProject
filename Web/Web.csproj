@@ -251,6 +251,7 @@
     <Content Include="StaticFiles\Images\logo.jpg" />
     <Content Include="UploadedFiles\Recipes\1.jpg" />
     <Content Include="UploadedFiles\Recipes\18.jpg" />
+    <Content Include="UploadedFiles\Recipes\20.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

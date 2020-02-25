@@ -155,6 +155,7 @@ namespace Web.Controllers
                   result =  await UserManager.AddToRoleAsync(user.Id, "RegisteredUser");
                     if (result.Succeeded)
                     {
+                        //todo: add users
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                         // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

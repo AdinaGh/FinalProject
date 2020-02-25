@@ -12,6 +12,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private readonly ICategoryService _categoryService;
