@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Services.Interfaces;
 using System;
 using System.Data;
 using System.Data.Entity;
@@ -12,12 +13,19 @@ namespace Web.Controllers
     [Authorize(Roles = "Admin")]
     public class CommentsController : Controller
     {
-        private RecipesDataContext db = new RecipesDataContext();
+        private readonly IRecipeService _recipeService;
+        private readonly ICommentService _commentService;
+        public CommentsController(ICommentService commentService, IRecipeService recipeService)
+        {
+            _commentService = commentService;
+            _recipeService = recipeService;
+        }
 
         // GET: Comments
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Recipe);
+            //var comments = db.Comments.Include(c => c.Recipe);
+            var comments = _commentService.GetAll();
             return View(comments.ToList().Select(co => MapEntityToView(co)).ToList());
         }
 
@@ -28,7 +36,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
+            var comment = _commentService.GetById(id.Value);
             if (comment == null)
             {
                 return HttpNotFound();
@@ -39,7 +47,7 @@ namespace Web.Controllers
         // GET: Comments/Create
         public ActionResult Create()
         {
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title");
+            ViewBag.RecipeId = new SelectList(_recipeService.GetAll(), "RecipeId", "Title");
             return View();
         }
 
@@ -54,12 +62,12 @@ namespace Web.Controllers
             {
                 var commentMap = MapViewToEntity(comment);
                 commentMap.CreatedDate = DateTime.Now;
-                db.Comments.Add(commentMap);
-                db.SaveChanges();
+
+                _commentService.Add(commentMap);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", comment.RecipeId);
+            ViewBag.RecipeId = new SelectList(_recipeService.GetAll(), "RecipeId", "Title", comment.RecipeId);
             return View(comment);
         }
 
@@ -81,13 +89,13 @@ namespace Web.Controllers
         {
             if (recipe?.AddComments != null)
             {
-                db.Comments.Add(new Comment()
+                _commentService.Add(new Comment()
                 {
                     RecipeId = recipe.RecipeId,
                     UserId = recipe.CreatedUserId,
                     Comment1 = recipe.AddComments,
+                    CreatedDate = DateTime.Now
                 });
-                db.SaveChanges();
             }
             return RedirectToAction("Details", "Recipes", new { id = recipe.RecipeId });
         }
@@ -99,12 +107,12 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
+            var comment = _commentService.GetById(id.Value);
             if (comment == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", comment.RecipeId);
+            ViewBag.RecipeId = new SelectList(_recipeService.GetAll(), "RecipeId", "Title", comment.RecipeId);
             var commentModel = MapEntityToView(comment);
             return View(commentModel);
         }
@@ -130,15 +138,14 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var originalComment = db.Comments.Find(comment.CommentId);
+                var originalComment = _commentService.GetById(comment.CommentId);
                 originalComment.RecipeId = comment.RecipeId;
                 originalComment.Comment1 = comment.Description;
-
-                db.Entry(originalComment).State = EntityState.Modified;
-                db.SaveChanges();
+                _commentService.Update(originalComment);
+                
                 return RedirectToAction("Index");
             }
-            ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", comment.RecipeId);
+            ViewBag.RecipeId = new SelectList(_recipeService.GetAll(), "RecipeId", "Title", comment.RecipeId);
             return View(comment);
         }
 
@@ -149,7 +156,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
+            var comment = _commentService.GetById(id.Value);
             if (comment == null)
             {
                 return HttpNotFound();
@@ -162,9 +169,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comment comment = db.Comments.Find(id);
-            db.Comments.Remove(comment);
-            db.SaveChanges();
+            _commentService.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -172,7 +177,8 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _recipeService.Dispose();
+                _commentService.Dispose();
             }
             base.Dispose(disposing);
         }
