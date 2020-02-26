@@ -283,6 +283,7 @@ CREATE TABLE Users
 	(
 	UserId int NOT NULL IDENTITY (1, 1),
 	[Name] nvarchar(200) NOT NULL,
+	[AspNetUserId] nvarchar(128) not null
 	)  ON [PRIMARY]
 GO
 ALTER TABLE Users ADD CONSTRAINT
@@ -325,3 +326,104 @@ ALTER TABLE Recipe ADD CONSTRAINT
 	 ON DELETE  NO ACTION 
 	
 GO
+
+--user & roles
+CREATE TABLE [AspNetRoles](
+[Id] [nvarchar](128) NOT NULL,
+[Name] [nvarchar](256) NOT NULL,
+CONSTRAINT [PK_dbo.AspNetRoles] PRIMARY KEY CLUSTERED 
+(
+  [Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+CREATE TABLE [AspNetUserClaims](
+   [Id] [int] IDENTITY(1,1) NOT NULL,
+   [UserId] [nvarchar](128) NOT NULL,
+   [ClaimType] [nvarchar](max) NULL,
+   [ClaimValue] [nvarchar](max) NULL,
+CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED 
+(
+   [Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+CREATE TABLE [AspNetUserLogins](
+    [LoginProvider] [nvarchar](128) NOT NULL,
+    [ProviderKey] [nvarchar](128) NOT NULL,
+    [UserId] [nvarchar](128) NOT NULL,
+CONSTRAINT [PK_dbo.AspNetUserLogins] PRIMARY KEY CLUSTERED 
+(
+    [LoginProvider] ASC,
+    [ProviderKey] ASC,
+    [UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+CREATE TABLE [AspNetUserRoles](
+   [UserId] [nvarchar](128) NOT NULL,
+   [RoleId] [nvarchar](128) NOT NULL,
+CONSTRAINT [PK_dbo.AspNetUserRoles] PRIMARY KEY CLUSTERED 
+(
+    [UserId] ASC,
+    [RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+CREATE TABLE [AspNetUsers](
+    [Id] [nvarchar](128) NOT NULL,
+    [Email] [nvarchar](256) NULL,
+    [EmailConfirmed] [bit] NOT NULL,
+    [PasswordHash] [nvarchar](max) NULL,
+    [SecurityStamp] [nvarchar](max) NULL,
+    [PhoneNumber] [nvarchar](max) NULL,
+    [PhoneNumberConfirmed] [bit] NOT NULL,
+    [TwoFactorEnabled] [bit] NOT NULL,
+    [LockoutEndDateUtc] [datetime] NULL,
+    [LockoutEnabled] [bit] NOT NULL,
+    [AccessFailedCount] [int] NOT NULL,
+    [UserName] [nvarchar](256) NOT NULL,
+CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
+(
+    [Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+ GO
+ ALTER TABLE [AspNetUserClaims]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
+ REFERENCES [AspNetUsers] ([Id])
+ ON DELETE CASCADE
+ GO
+ ALTER TABLE [AspNetUserClaims] CHECK CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]
+ GO
+ ALTER TABLE [AspNetUserLogins]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
+ REFERENCES [AspNetUsers] ([Id])
+ ON DELETE CASCADE
+ GO
+ ALTER TABLE [AspNetUserLogins] CHECK CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId]
+ GO
+ ALTER TABLE [AspNetUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] FOREIGN KEY([RoleId])
+ REFERENCES [AspNetRoles] ([Id])
+ ON DELETE CASCADE
+ GO
+ ALTER TABLE [AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId]
+ GO
+ ALTER TABLE [AspNetUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
+ REFERENCES [AspNetUsers] ([Id])
+ ON DELETE CASCADE
+ GO
+ ALTER TABLE [AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId]
+ GO
+ ALTER TABLE [Users] ADD CONSTRAINT
+	FK_Users_AspNetUsers FOREIGN KEY
+	(
+	AspNetUserId
+	) REFERENCES AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 

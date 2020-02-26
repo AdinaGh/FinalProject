@@ -1,8 +1,6 @@
 insert into [AspNetRoles] values(1,'Admin')
 insert into [AspNetRoles] values(2,'RegisteredUser')
 GO
-insert into users(name) values('John Doe')
-GO
 
 INSERT INTO [Category]([Name])
      VALUES('Dinner')
@@ -47,5 +45,9 @@ INSERT INTO [Occasion]([Name])
      VALUES('BBQ')
 INSERT INTO [Occasion]([Name])
      VALUES('Wedding')
-
-
+GO
+--------
+---after creating admin
+--insert into users(name, aspnetuserid) values('John Doe','bd48fe70-44bc-4429-8e5f-a6cd23e074a2')
+--update [AspNetUserRoles] set roleId=1 where userid='bd48fe70-44bc-4429-8e5f-a6cd23e074a2'
+GO
