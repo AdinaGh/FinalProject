@@ -1,11 +1,10 @@
 using DataAccess;
 using DataAccess.Interfaces;
-using Entities.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Services;
 using Services.Interfaces;
 using System;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Unity;
 using Unity.Injection;
 using Unity.Lifetime;

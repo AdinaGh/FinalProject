@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Entities.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Entities.Models;
 using Web.Models;
 
 namespace Web.Controllers
@@ -50,7 +46,7 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( UserRatingViewModel userRating)
+        public ActionResult Create(UserRatingViewModel userRating)
         {
             if (ModelState.IsValid)
             {

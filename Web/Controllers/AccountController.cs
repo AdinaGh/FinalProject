@@ -1,10 +1,10 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using Web.Models;
 
 namespace Web.Controllers
@@ -152,7 +152,7 @@ namespace Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                  result =  await UserManager.AddToRoleAsync(user.Id, "RegisteredUser");
+                    result = await UserManager.AddToRoleAsync(user.Id, "RegisteredUser");
                     if (result.Succeeded)
                     {
                         //todo: add users

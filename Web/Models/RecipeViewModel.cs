@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace Web.Models
 {
@@ -22,7 +21,7 @@ namespace Web.Models
         public string Notes { get; set; }
         [Range(1, int.MaxValue)]
         public Nullable<int> PreparationMinutes { get; set; }
-        [Range(1,int.MaxValue)]
+        [Range(1, int.MaxValue)]
         public Nullable<int> TotalMinutes { get; set; }
         [Range(1, int.MaxValue)]
         public Nullable<int> Serves { get; set; }
@@ -53,14 +52,16 @@ namespace Web.Models
         public int RecipeId { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public string DisplayCreatedDate {
+        public string DisplayCreatedDate
+        {
             get
             {
                 return CreatedDate == null ? "" : CreatedDate.ToShortDateString();
             }
         }
         [Range(1, int.MaxValue)]
-        public int CreatedUserId { 
+        public int CreatedUserId
+        {
             get
             {
                 return 1;
@@ -69,10 +70,11 @@ namespace Web.Models
         public int CuisineId { get; set; }
         public int DificultyId { get; set; }
 
-        public string DisplayPreparationMinutes { 
+        public string DisplayPreparationMinutes
+        {
             get
             {
-                if(PreparationMinutes==null)
+                if (PreparationMinutes == null)
                 {
                     return "";
                 }

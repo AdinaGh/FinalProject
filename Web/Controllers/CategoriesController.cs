@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Entities.Models;
+using Services.Interfaces;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Entities.Models;
-using Services.Interfaces;
 using Web.Models;
 
 namespace Web.Controllers
@@ -89,7 +85,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           
+
             var category = _categoryService.GetById(id.Value);
             if (category == null)
             {
@@ -137,7 +133,7 @@ namespace Web.Controllers
             return View(new CategoryViewModel()
             {
                 Name = category.Name,
-                CategoryId=category.CategoryId,
+                CategoryId = category.CategoryId,
                 //RecipeCategories = category.RecipeCategories
             });
         }

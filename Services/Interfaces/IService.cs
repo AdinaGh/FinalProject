@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Services.Interfaces
 {
-    public interface IService<T>: IDisposable
+    public interface IService<T> : IDisposable
     {
         IEnumerable<T> GetAll();
         T GetById(int id);

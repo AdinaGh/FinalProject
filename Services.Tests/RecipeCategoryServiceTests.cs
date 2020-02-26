@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using DataAccess.Interfaces;
+﻿using DataAccess.Interfaces;
 using Entities.Models;
 using NSubstitute;
 using Services.Interfaces;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Services.Tests
@@ -56,7 +55,7 @@ namespace Services.Tests
         {
             //Arrange
             var recipeCategory = new RecipeCategory() { };
-            
+
             //Act
             _service.Update(recipeCategory);
 

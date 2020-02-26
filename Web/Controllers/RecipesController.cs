@@ -1,18 +1,15 @@
-﻿using System;
+﻿using Entities.Models;
+using Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using Entities.Models;
-using Services.Interfaces;
 using Web.Models;
 
 namespace Web.Controllers
-{    
+{
     public class RecipesController : Controller
     {
         private readonly IRecipeService _recipeService;
@@ -53,7 +50,7 @@ namespace Web.Controllers
         {
             var recipes = _recipeService
                 .GetAll();
-              
+
             return View(MapEntityToList(recipes));
         }
 
@@ -63,11 +60,10 @@ namespace Web.Controllers
             var recipes = _recipeService
               .Filter(re => re.Title.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
 
-             
             return View("Index", MapEntityToList(recipes, filter));
         }
 
-        private RecipeListViewModel MapEntityToList(IEnumerable<Recipe> recipes, string filter="")
+        private RecipeListViewModel MapEntityToList(IEnumerable<Recipe> recipes, string filter = "")
         {
             return new RecipeListViewModel()
             {
@@ -117,19 +113,19 @@ namespace Web.Controllers
         public ActionResult Create(
         RecipeViewModel recipe)
         {
-             //User.Identity.Name;
+            //User.Identity.Name;
             if (ModelState.IsValid)
             {
                 var recipeMap = MapViewToEntity(recipe);
                 recipeMap.CreatedDate = DateTime.Now;
-                _recipeService.Add(recipeMap); 
+                _recipeService.Add(recipeMap);
                 return RedirectToAction("Index");
             }
 
 
             ViewBag.CuisineId = new SelectList(_cuisineService.GetAll(), "CuisineId", "Name", recipe.CuisineId);
             ViewBag.DificultyId = new SelectList(_difficultyService.GetAll(), "DificultyId", "Name", recipe.DificultyId);
-            
+
             return View(recipe);
         }
 
@@ -258,7 +254,7 @@ namespace Web.Controllers
 
                 }).ToList(),
                 RecipeSteps = recipe.RecipeSteps.OrderBy(st => st.Step).Select(st => new RecipeStepModel() { RecipeId = st.RecipeId, Description = st.Description, RecipeStepId = st.RecipeStepId, Step = st.Step }).ToList(),
-                
+
                 UserRatings = recipe.UserRatings.Select(ur => new UserRatingViewModel() { RecipeId = ur.RecipeId, Rating = ur.Rating, UserId = ur.UserId, UserRatingId = ur.UserRatingId }).ToList()
             };
         }
@@ -276,7 +272,7 @@ namespace Web.Controllers
                 RecipeId = recipe.RecipeId,
                 ImageUrl = recipe.ImageUrl,
                 Title = recipe.Title,
-              CreatedUserId = recipe.CreatedUserId,
+                CreatedUserId = recipe.CreatedUserId,
                 CreatedDate = recipe.CreatedDate
             };
         }

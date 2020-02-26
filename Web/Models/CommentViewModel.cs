@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Web.Models
 {
@@ -15,7 +12,7 @@ namespace Web.Models
         public int CreatedUserId { get; set; } = 1;
         public DateTime CreatedDate { get; internal set; }
 
-        [Display(Name ="Recipe")]
+        [Display(Name = "Recipe")]
         public string RecipeTitle { get; set; }
 
     }

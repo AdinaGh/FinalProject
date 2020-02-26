@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Entities.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Entities.Models;
 using Web.Models;
 
 namespace Web.Controllers
@@ -91,7 +89,7 @@ namespace Web.Controllers
                 });
                 db.SaveChanges();
             }
-                return RedirectToAction("Details", "Recipes", new { id = recipe.RecipeId });
+            return RedirectToAction("Details", "Recipes", new { id = recipe.RecipeId });
         }
 
         // GET: Comments/Edit/5
@@ -134,7 +132,7 @@ namespace Web.Controllers
             {
                 var originalComment = db.Comments.Find(comment.CommentId);
                 originalComment.RecipeId = comment.RecipeId;
-                originalComment.Comment1 = comment.Description;               
+                originalComment.Comment1 = comment.Description;
 
                 db.Entry(originalComment).State = EntityState.Modified;
                 db.SaveChanges();

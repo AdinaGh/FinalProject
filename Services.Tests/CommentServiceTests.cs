@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using NSubstitute;
-using DataAccess.Interfaces;
+﻿using DataAccess.Interfaces;
 using Entities.Models;
-using Xunit;
+using NSubstitute;
 using Services.Interfaces;
+using System.Collections.Generic;
+using Xunit;
 
 namespace Services.Tests
 {
@@ -32,7 +32,7 @@ namespace Services.Tests
             _repository.Filter(null).ReturnsForAnyArgs(commentList);
             //Act
             _service.DeleteByRecipe(recipeId);
-            
+
             //Assert
             _repository.Received(2).Remove(Arg.Any<Comment>());
         }

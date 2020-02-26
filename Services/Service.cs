@@ -2,9 +2,6 @@
 using Services.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -34,7 +31,7 @@ namespace Services
 
         public IEnumerable<T> Filter(Func<T, bool> predicate)
         {
-           return _repository.Filter(predicate);
+            return _repository.Filter(predicate);
         }
 
         public IEnumerable<T> GetAll()

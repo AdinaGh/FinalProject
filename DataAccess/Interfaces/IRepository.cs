@@ -5,7 +5,7 @@ using System.Linq;
 namespace DataAccess.Interfaces
 {
     public interface IRepository<T> : IDisposable
-        where T: class
+        where T : class
     {
         IQueryable<T> GetAll();
         T GetById(int id);
