@@ -98,3 +98,11 @@ div.tab-recipes hr{
     border: none;
     list-style-type: decimal;
 }
+
+div.rec-list-filt div button{
+    width:100px;
+}
+
+div.rec-list-filt {
+    margin-bottom: 20px;
+}

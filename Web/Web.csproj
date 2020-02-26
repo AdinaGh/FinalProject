@@ -211,6 +211,7 @@
     <Compile Include="Models\OccasionModel.cs" />
     <Compile Include="Models\RecipeCategoryModel.cs" />
     <Compile Include="Models\RecipeIngredientModel.cs" />
+    <Compile Include="Models\RecipeListViewModel.cs" />
     <Compile Include="Models\RecipeOccasionModel.cs" />
     <Compile Include="Models\RecipeStepModel.cs" />
     <Compile Include="Models\RecipeViewModel.cs" />

@@ -52,14 +52,33 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             var recipes = _recipeService
-                .GetAll()
-                .Select(ca => new RecipeViewModel()
+                .GetAll();
+              
+            return View(MapEntityToList(recipes));
+        }
+
+        [HttpGet]
+        public ActionResult Search(string filter)
+        {
+            var recipes = _recipeService
+              .Filter(re => re.Title.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+
+             
+            return View("Index", MapEntityToList(recipes, filter));
+        }
+
+        private RecipeListViewModel MapEntityToList(IEnumerable<Recipe> recipes, string filter="")
+        {
+            return new RecipeListViewModel()
+            {
+                List = recipes.Select(ca => new RecipeViewModel()
                 {
                     RecipeId = ca.RecipeId,
                     ImageUrl = ca.ImageUrl,
                     Title = ca.Title
-                });
-            return View(recipes);
+                }).ToList(),
+                Filter = filter
+            };
         }
 
         // GET: Recipes/Details/5
