@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Entities.Models.Comment>
+﻿@model IEnumerable<Web.Models.CommentViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,13 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Comment1)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Recipe.Title)
+            @Html.DisplayNameFor(model => model.RecipeTitle)
         </th>
         <th></th>
     </tr>
@@ -26,13 +23,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Comment1)
+            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Recipe.Title)
+            @Html.DisplayFor(modelItem => item.RecipeTitle)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CommentId }) |

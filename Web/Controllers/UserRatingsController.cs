@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Entities.Models;
+using Web.Models;
 
 namespace Web.Controllers
 {
@@ -49,17 +50,28 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserRatingId,RecipeId,UserId,Rating")] UserRating userRating)
+        public ActionResult Create( UserRatingViewModel userRating)
         {
             if (ModelState.IsValid)
             {
-                db.UserRatings.Add(userRating);
+                var userRatingMap = MapViewToEntity(userRating);
+                db.UserRatings.Add(userRatingMap);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", userRating.RecipeId);
             return View(userRating);
+        }
+
+        private UserRating MapViewToEntity(UserRatingViewModel userRating)
+        {
+            return new UserRating()
+            {
+                RecipeId = userRating.RecipeId,
+                UserId = userRating.UserId,
+                Rating = userRating.Rating
+            };
         }
 
         // GET: UserRatings/Edit/5
@@ -75,7 +87,18 @@ namespace Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", userRating.RecipeId);
-            return View(userRating);
+            return View(MapEntityToView(userRating));
+        }
+
+        private UserRatingViewModel MapEntityToView(UserRating rating)
+        {
+            return new UserRatingViewModel()
+            {
+                Rating = rating.Rating,
+                RecipeId = rating.RecipeId,
+                UserId = rating.UserId,
+                UserRatingId = rating.UserRatingId
+            };
         }
 
         // POST: UserRatings/Edit/5

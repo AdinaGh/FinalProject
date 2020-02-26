@@ -33,7 +33,7 @@
                     <li>@Html.ActionLink("Recipes", "Index", "Recipes")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.IsAuthenticated  && !User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Add Recipe", "Create", "Recipes")</li>
                     }
@@ -56,10 +56,9 @@
                     @Html.ActionLink("Recipes", "Index", "Recipes") |
                     @Html.ActionLink("About", "About", "Home") |
                     @Html.ActionLink("Contact", "Contact", "Home")
-
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                      @Html.Raw("|");
+                      @Html.Raw(" | ");
                      @Html.ActionLink("Admin", "Index", "Admin");
                     }
                      <br />

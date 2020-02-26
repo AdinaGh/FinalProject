@@ -240,7 +240,7 @@ namespace Web.Controllers
                 }).ToList(),
                 RecipeSteps = recipe.RecipeSteps.OrderBy(st => st.Step).Select(st => new RecipeStepModel() { RecipeId = st.RecipeId, Description = st.Description, RecipeStepId = st.RecipeStepId, Step = st.Step }).ToList(),
                 
-                UserRatings = recipe.UserRatings.Select(ur => new UserRatingModel() { RecipeId = ur.RecipeId, Rating = ur.Rating, UserId = ur.UserId, UserRatingId = ur.UserRatingId }).ToList()
+                UserRatings = recipe.UserRatings.Select(ur => new UserRatingViewModel() { RecipeId = ur.RecipeId, Rating = ur.Rating, UserId = ur.UserId, UserRatingId = ur.UserRatingId }).ToList()
             };
         }
 

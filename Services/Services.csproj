@@ -56,6 +56,7 @@
     <Compile Include="Interfaces\IRecipeStepService.cs" />
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\IUserRatingService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="RecipeStepService.cs" />
     <Compile Include="UserRatingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="RecipeOccasionService.cs" />
     <Compile Include="RecipeService.cs" />
     <Compile Include="Service.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

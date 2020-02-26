@@ -8,11 +8,6 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -23,13 +18,6 @@ namespace Web.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        public ActionResult Old()
-        {
-            ViewBag.Message = "Old index page.";
 
             return View();
         }

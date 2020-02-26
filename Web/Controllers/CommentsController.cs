@@ -20,7 +20,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             var comments = db.Comments.Include(c => c.Recipe);
-            return View(comments.ToList());
+            return View(comments.ToList().Select(co => MapEntityToView(co)).ToList());
         }
 
         // GET: Comments/Details/5
@@ -35,7 +35,7 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(MapEntityToView(comment));
         }
 
         // GET: Comments/Create
@@ -50,17 +50,31 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CommentId,Comment1,RecipeId,UserId")] Comment comment)
+        public ActionResult Create(CommentViewModel comment)
         {
             if (ModelState.IsValid)
             {
-                db.Comments.Add(comment);
+                var commentMap = MapViewToEntity(comment);
+                commentMap.CreatedDate = DateTime.Now;
+                db.Comments.Add(commentMap);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", comment.RecipeId);
             return View(comment);
+        }
+
+        private Comment MapViewToEntity(CommentViewModel comment)
+        {
+            return new Comment()
+            {
+                RecipeId = comment.RecipeId,
+                Comment1 = comment.Description,
+                UserId = comment.CreatedUserId,
+                CreatedDate = comment.CreatedDate,
+                CommentId = comment.CommentId
+            };
         }
 
         [HttpPost]
@@ -73,7 +87,7 @@ namespace Web.Controllers
                 {
                     RecipeId = recipe.RecipeId,
                     UserId = recipe.CreatedUserId,
-                    Comment1 = recipe.AddComments
+                    Comment1 = recipe.AddComments,
                 });
                 db.SaveChanges();
             }
@@ -93,7 +107,20 @@ namespace Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.RecipeId = new SelectList(db.Recipes, "RecipeId", "Title", comment.RecipeId);
-            return View(comment);
+            var commentModel = MapEntityToView(comment);
+            return View(commentModel);
+        }
+
+        private CommentViewModel MapEntityToView(Comment comment)
+        {
+            return new CommentViewModel()
+            {
+                Description = comment.Comment1,
+                CommentId = comment.CommentId,
+                RecipeId = comment.RecipeId,
+                CreatedDate = comment.CreatedDate,
+                RecipeTitle = comment.Recipe.Title
+            };
         }
 
         // POST: Comments/Edit/5
@@ -101,11 +128,15 @@ namespace Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CommentId,Comment1,RecipeId,UserId")] Comment comment)
+        public ActionResult Edit(CommentViewModel comment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(comment).State = EntityState.Modified;
+                var originalComment = db.Comments.Find(comment.CommentId);
+                originalComment.RecipeId = comment.RecipeId;
+                originalComment.Comment1 = comment.Description;               
+
+                db.Entry(originalComment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -125,7 +156,7 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(MapEntityToView(comment));
         }
 
         // POST: Comments/Delete/5

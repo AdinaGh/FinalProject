@@ -203,6 +203,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\CuisineModel.cs" />
     <Compile Include="Models\DificultyModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -214,7 +215,7 @@
     <Compile Include="Models\RecipeStepModel.cs" />
     <Compile Include="Models\RecipeViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
-    <Compile Include="Models\UserRatingModel.cs" />
+    <Compile Include="Models\UserRatingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -263,9 +264,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Details.cshtml" />
@@ -336,6 +334,8 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
