@@ -243,7 +243,12 @@ namespace Web.Controllers
                     RecipeCategoryId = rc.RecipeCategoryId,
                     RecipeId = rc.RecipeId
                 }).ToList(),
-                Comments = recipe.Comments.Select(co => new CommentModel() { RecipeId = co.RecipeId, CommentId = co.CommentId, Description = co.Comment1 }).ToList(),
+                Comments = recipe.Comments.Select(co => new CommentModel() { 
+                    RecipeId = co.RecipeId, 
+                    CommentId = co.CommentId, 
+                    Description = co.Comment1,
+                CreatedDate = co.CreatedDate
+                }).ToList(),
                 RecipeIngredients = recipe.RecipeIngredients.Select(ri => new RecipeIngredientModel() { RecipeId = ri.RecipeId, Ingredient = ri.Ingredient, RecipeIngredientId = ri.RecipeIngredientId }).ToList(),
                 RecipeOccasions = recipe.RecipeOccasions.Select(oc => new RecipeOccasionModel()
                 {

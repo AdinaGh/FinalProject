@@ -42,6 +42,7 @@ namespace Web.Models
             }
         }
         public ICollection<CommentModel> Comments { get; set; }
+
         public CuisineModel Cuisine { get; set; }
         public DificultyModel Dificulty { get; set; }
         public ICollection<RecipeCategoryModel> RecipeCategories { get; set; }
