@@ -1,24 +1,25 @@
 ﻿using DataAccess.Interfaces;
 using Entities.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using Services.Interfaces;
 using System.Collections.Generic;
-using Xunit;
 
 namespace Services.Tests
 {
+    [TestClass]
     public class CommentServiceTests
     {
         private readonly ICommentService _service;
         private readonly IRepository<Comment> _repository;
-
+               
         public CommentServiceTests()
         {
             _repository = Substitute.For<IRepository<Comment>>();
             _service = new CommentService(_repository);
         }
 
-        [Fact]
+        [TestMethod]
         public void DeleteByRecipe_ShouldCallRepositoryDelete()
         {
             //Arrange

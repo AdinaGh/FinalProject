@@ -1,12 +1,13 @@
 ﻿using DataAccess.Interfaces;
 using Entities.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using Services.Interfaces;
 using System.Collections.Generic;
-using Xunit;
 
 namespace Services.Tests
 {
+    [TestClass]
     public class RecipeCategoryServiceTests
     {
         private readonly IRecipeCategoryService _service;
@@ -18,7 +19,7 @@ namespace Services.Tests
             _service = new RecipeCategoryService(_repository);
         }
 
-        [Fact]
+        [TestMethod]
         public void DeleteByRecipe_ShouldCallRepositoryDelete()
         {
             //Arrange
@@ -37,7 +38,7 @@ namespace Services.Tests
             _repository.Received(2).Remove(Arg.Any<RecipeCategory>());
         }
 
-        [Fact]
+        [TestMethod]
         public void Add_ShouldCallRepositoryAdd()
         {
             //Arrange
@@ -50,7 +51,7 @@ namespace Services.Tests
             _repository.Received(1).Add(recipeCategory);
         }
 
-        [Fact]
+        [TestMethod]
         public void Update_ShouldCallRepositoryUpdate()
         {
             //Arrange
@@ -62,7 +63,8 @@ namespace Services.Tests
             //Assert
             _repository.Received(1).Update(recipeCategory);
         }
-        [Fact]
+
+        [TestMethod]
         public void Delete_ShouldCallRepositoryRemove()
         {
             //Arrange
