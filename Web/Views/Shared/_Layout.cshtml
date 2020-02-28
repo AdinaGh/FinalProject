@@ -30,7 +30,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Recipes")</li>
-                    <li>@Html.ActionLink("Recipes", "Index", "Recipes")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (User.Identity.IsAuthenticated  && !User.IsInRole("Admin"))
@@ -53,7 +52,6 @@
             <div class="container">
                 <p class="text-muted">
                     @Html.ActionLink("Home", "Index", "Recipes") |
-                    @Html.ActionLink("Recipes", "Index", "Recipes") |
                     @Html.ActionLink("About", "About", "Home") |
                     @Html.ActionLink("Contact", "Contact", "Home")
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))

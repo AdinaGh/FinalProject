@@ -10,8 +10,8 @@
 <div>
     <h3>Administration Area</h3>
     @Html.ActionLink("Add Recipe", "Create", "Recipes")<br />
-    <a href="@Url.Action("Edit", "Recipes")" onclick="return gotoEdit(this);">Edit Recipe</a> <input type="number" id="rec-edit-id" value="1" /><br />
-    <a href="@Url.Action("Delete", "Recipes")" onclick="return gotoDel(this);">Delete Recipe</a> <input type="number" id="rec-del-id" value="1" /><br />
+    <a href="@Url.Action("Edit", "Recipes")" onclick="return gotoEdit(this);">Edit Recipe</a> <input type="number" id="rec-edit-id" value="" /><br />
+    <a href="@Url.Action("Delete", "Recipes")" onclick="return gotoDel(this);">Delete Recipe</a> <input type="number" id="rec-del-id" value="" /><br />
     @Html.ActionLink("Categories", "Index", "Categories")<br />
     @Html.ActionLink("Dificulties", "Index", "Dificulties")<br />
     @Html.ActionLink("Cuisines", "Index", "Cuisines")<br />

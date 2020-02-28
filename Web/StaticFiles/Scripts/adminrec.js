@@ -1,6 +1,6 @@
 ﻿function gotoEdit(ahref) {
     var id = $('#rec-edit-id').val();
-    if (id === undefined) {
+    if (!id) {
         return false;
     }
     var url = $(ahref).attr('href');
@@ -15,7 +15,7 @@
 
 function gotoDel(ahref) {
     var id = $('#rec-del-id').val();
-    if (id === undefined) {
+    if (!id) {
         return false;
     }
     var url = $(ahref).attr('href');
